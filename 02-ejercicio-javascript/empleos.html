@@ -1,175 +1,153 @@
-<!doctype html>
-<html lang="es">
-  <head>
-    <title>DevJobs - Empleos</title>
-    <meta charset="UTF-8" />
-    <meta
-      name="description"
-      content="Listado con empleos y filtros para encontrar el trabajo de tus sueños."
-    />
-    <link rel="stylesheet" href="./styles.css" />
-    <!-- Aquí están tus scripts -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encuentra tu próxion trabajo</title>
+    <link rel="stylesheet" href="./styles.css">
     <script type="module" src="./fetch-data.js"></script>
     <script type="module" src="./filters.js"></script>
     <script type="module" src="./apply-button.js"></script>
-  </head>
+</head>
 
-  <body>
-    <header>
-      <h1>
-        <svg
-          fill="none"
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <polyline points="16 18 22 12 16 6"></polyline>
-          <polyline points="8 6 2 12 8 18"></polyline>
-        </svg>
-        DevJobs
-      </h1>
+<body>
 
-      <nav>
-        <a href="#">Empleos</a>
-      </nav>
-
-      <a href="#" aria-label="Ir a mi perfil" title="Mi perfil">
-        <img src="https://unavatar.io/github/mdo" alt="Avatar del usuario" width="32" height="32" />
-      </a>
+    <header class="header">
+        <div>
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                    id="Capa_1" x="0px" y="0px" width="25" height="25" viewBox="0 0 16.479 16.479"
+                    style="enable-background:new 0 0 16.479 16.479;" xml:space="preserve" fill="#09f">
+                    <g>
+                        <path
+                            d="M13.484,8.239l2.994,1.728l-2.621,4.544l-2.995-1.729v3.458H5.617v-3.458l-2.995,1.729L0,9.967l2.995-1.728L0,6.509   l2.622-4.54l2.995,1.729V0.239h5.245v3.458l2.995-1.729l2.621,4.54L13.484,8.239z" />
+                    </g>
+                </svg>
+                <h2>DevJobs</h2>
+                <nav class="nav">
+                    <a href="./index.html">Inicio</a> <!-- target:_blank: nueva pestaña self: misma pestaña -->
+                    <a href="./empleos.html">Empleos</a>
+                    <!-- rel: noopener(que la ueva pagina no tenga acceso a la antigua noreferrer: no envia informacion de referencia sobre donde viene el usuario) -->
+                    <a href="Empresas">Empresas</a>
+                    <a href="Salarios">Salarios</a>
+                </nav>
+            </div>
+        </div>
+        <div>
+            <a class="a_head" type="button" href="">Subir CV</a>
+            <img src="../01-ejercicio-html-css/luffy_profile.jpg" alt="Avatar del usuario" width="50" height="50">
+        </div>
     </header>
 
-    <main>
-      <section class="jobs-search">
-        <h1>Encuentra tu próximo trabajo</h1>
-        <p>Explora miles de oportunidades en el sector tecnológico.</p>
+    <main class="main_estrecho">
+        <div>
+            <section class="sec_main">
+                <h1>Encuentra tu próximo trabajo</h1>
+                <p>Explora miles de oportunidades en el sector tecnológico</p>
 
-        <form id="empleos-search-form" role="search">
-          <div class="search-bar">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="icon icon-tabler icons-tabler-outline icon-tabler-search"
-            >
-              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-              <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
-              <path d="M21 21l-6 -6" />
-            </svg>
+                <form class="form_princi w-100" action="" role="search">
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="icon icon-tabler icons-tabler-outline icon-tabler-search">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+                            <path d="M21 21l-6 -6" />
+                        </svg>
+                        <input id="search_input" type="text" placeholder="Buscar trabajos, empresas o habilidades">
+                    </div>
+                    <div class="section_filter" id="filters">
+                        <div>
+                            <select name="tecnologia" id="filter-tecnologia">
+                                <option value="" disabled selected hidden>Tecnología</option>
+                                <option value="javascript">JavaScript</option>
+                                <option value="react">React</option>
+                                <option value="nodejs">Node.js</option>
+                                <option value="python">Python</option>
+                                <option value="sql">SQL</option>
+                                <option value="erre">R</option>
+                                <option value="swift">Swift</option>
+                                <option value="kotlin">Kotlin</option>
+                                <option value="aws">AWS</option>
+                                <option value="azure">Azure</option>
+                                <option value="gcp">GCP</option>
+                            </select>
 
-            <input
-              name="search"
-              id="empleos-search-input"
-              type="text"
-              placeholder="Buscar trabajos, empresas o habilidades"
-            />
-          </div>
+                            <select name="ubicacion" id="filter-ubicacion">
+                                <option value="" disabled selected hidden>Ubicación</option>
+                                <option value="remoto">Remoto</option>
+                                <option value="mexico">Ciudad de México</option>
+                                <option value="guadalajara">Guadalajara</option>
+                            </select>
 
-          <div class="search-filters">
-            <select name="technology" id="filter-technology">
-              <option value="">Tecnología</option>
-              <optgroup label="Tecnologías populares">
-                <option value="javascript">JavaScript</option>
-                <option value="python">Python</option>
-                <option value="react">React</option>
-                <option value="nodejs">Node.js</option>
-              </optgroup>
-              <option value="java">Java</option>
-              <hr />
-              <option value="csharp">C#</option>
-              <option value="c">C</option>
-              <option value="c++">C++</option>
-              <hr />
-              <option value="ruby">Ruby</option>
-              <option value="php">PHP</option>
-            </select>
+                            <select name="tipo_contrato" id="filter-tipo_contrato">
+                                <option value="" disabled selected hidden>Tipo de contrato</option>
+                                <option value="tiempo_completo">Tiempo completo</option>
+                                <option value="freelance">Freelance</option>
+                                <option value="temporal">Temporal</option>
+                                <option value="practicas">Prácticas</option>
+                            </select>
 
-            <select name="location" id="filter-location">
-              <option value="">Ubicación</option>
-              <option value="remoto">Remoto</option>
-              <option value="cdmx">Ciudad de México</option>
-              <option value="guadalajara">Guadalajara</option>
-              <option value="monterrey">Monterrey</option>
-              <option value="barcelona">Barcelona</option>
-            </select>
+                            <select name="nivel_experiencia" id="filter-nivel_experiencia">
+                                <option value="" disabled selected hidden>Nivel de experiencia</option>
+                                <option value="junior">Junior</option>
+                                <option value="semi_senior">Semi-Senior</option>
+                                <option value="senior">Senior</option>
+                                <option value="lead">Tech Lead</option>
+                            </select>
+                        </div>
+                        <div>
+                            <button type="button" id="btn_del_filters" class="btn_del_filters"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-x">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M18 6l-12 12" />
+                                    <path d="M6 6l12 12" />
+                                </svg></button>
+                        </div>
+                        <span id="selected_value"></span>
+                    </div>
+                </form>
+            </section>
+            <section class="sect_res_busqueda btn_active_contain">
+                <h2>Resultados de búsqueda</h2>
+                <div id="jobs-listings" class="env_result">
 
-            <select name="experience-level" id="filter-experience-level">
-              <option value="">Nivel de experiencia</option>
-              <option value="junior">Junior</option>
-              <option value="mid">Mid-level</option>
-              <option value="senior">Senior</option>
-              <option value="lead">Lead</option>
-            </select>
-          </div>
-        </form>
-      </section>
+                </div>
+            </section>
+            <nav class="paginacion">
+                <ul>
+                    <li>
+                        <a href=""><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-left">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M15 6l-6 6l6 6" />
+                            </svg></a>
+                    </li>
+                    <li id="pages_nav" class="pag_active"><a href="">1</a></li>
 
-      <section class="jobs-result">
-        <h2>Resultados de búsqueda</h2>
-
-        <ul class="jobs-listings">
-          <!-- Aquí se insertan los empleos dinámicamente -->
-        </ul>
-
-        <nav class="pagination">
-          <a
-            href="#"
-            aria-label="Ir a la página anterior de los resultados de búsqueda"
-            title="Página anterior"
-          >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-              <path d="M15 6l-6 6l6 6" />
-            </svg>
-          </a>
-          <a class="is-active" href="#">1</a>
-          <a href="#">2</a>
-          <a href="#">3</a>
-          <a href="#">4</a>
-          <a href="#">5</a>
-          <a
-            href="#"
-            aria-label="Ir a la página siguiente de los resultados de búsqueda"
-            title="Página siguiente"
-          >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right"
-            >
-              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-              <path d="M9 6l6 6l-6 6" />
-            </svg>
-          </a>
-        </nav>
-      </section>
+                    <li>
+                        <a href="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M9 6l6 6l-6 6" />
+                            </svg>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </main>
-
-    <footer>
-      <small>&copy; 2025 DevJobs. Todos los derechos reservados.</small>
+    <footer class="footer">
+        <small>&copy; 2025 DevJobs. Todos los derechos reservados.</small>
     </footer>
-  </body>
+</body>
+
 </html>
