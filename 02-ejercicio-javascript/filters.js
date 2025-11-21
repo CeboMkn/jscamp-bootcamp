@@ -1,25 +1,40 @@
 /* Aquí va la lógica para filtrar los resultados de búsqueda */
+import { getJobs } from "./fetch-data.js"
 import { allJobs, containers_resultados } from "./fetch-data.js"
 
 let pageActual = 1
 const RESULTS_PAGES = 4
 let numbersNav = 0
 const container_nav = document.querySelector('.paginacion ul')
+let jobFilter = []
 
+getJobs().then(() => {
+    jobFilter = [...allJobs]
+    renderJobs()
+})
 activar_filtros()
-search_job()
+
+let filters = {
+    tecnologia: '',
+    ubicacion: '',
+    tipo: '',
+    nivel: '',
+    text: ''
+}
 
 function activar_filtros() {
 
-    let filters = {
-        tecnologia: '',
-        ubicacion: '',
-        tipo_contrato: '',
-        nivel_experiencia: ''
-    }
-
     const filters_contain = document.getElementById('filters')
+    const input = document.getElementById('search_input')
 
+    /* APLICAR FILTROS A ESCRIBIR */
+    input.addEventListener('input', () => {
+
+        filters.text = input.value.toLowerCase()
+        aplicar_filtros()
+    })
+
+    /* APLICAR FILTROS AL CAMBIAR SELECT */
     filters_contain.addEventListener('change', (e) => {
 
         const target = e.target
@@ -33,10 +48,10 @@ function activar_filtros() {
         }
     })
 
+    /* RESET FILTROS */
     filters_contain.addEventListener('click', (e) => {
 
-        const target = e.target
-        const btn_del = target.closest('#btn_del_filters')
+        const btn_del = e.target.closest('#btn_del_filters')
 
         if (btn_del) {
 
@@ -50,6 +65,7 @@ function activar_filtros() {
         }
     })
 
+    /* CREA JOBFILTER CON LOS FILTROS PARA RENDERJOBS */
     function aplicar_filtros() {
 
         if (!containers_resultados) {
@@ -57,39 +73,39 @@ function activar_filtros() {
             return
         }
 
-        const campos = Object.keys(filters);
+        const onFilters = Object.values(filters).some(v => v !== '')
+        const { text } = filters
+        if (!onFilters) {
+            jobFilter = [...allJobs]
+            renderJobs()
+            return
+        }
 
-        containers_resultados.forEach(res => {
+        jobFilter = allJobs.filter(job => {
+            const data = job.data
 
-            const datos = res.dataset;
-            const visible = campos.every(campo => {
+            if (text) {
+                const texto = `${job.titulo} ${job.empresa}`.toLowerCase()
+                const palabras = text.split(/\s+/).filter(p => p.trim() !== '')
+                const coincide = palabras.every(palabra => texto.includes(palabra))
+                if (!coincide) return false
+            }
+            for (const campo in filters) {
+                const filtro = filters[campo]
+                if (!filtro || campo === "text") continue
 
-                const filtro = filters[campo];
-                return !filtro || datos[campo].includes(filtro);
-            });
-
-            res.style.display = visible ? 'flex' : 'none';
-        });
-    }
-}
-
-function search_job() {
-
-    const input = document.getElementById('search_input')
-
-    input.addEventListener('input', () => {
-
-        containers_resultados.forEach(res => {
-
-            const text_h = res.querySelector('.title_job').textContent.toLowerCase()
-            const text_input = input.value.toLowerCase()
-
-            text_h.includes(text_input)
-
-                ? res.style.display = 'flex'
-                : res.style.display = 'none'
+                const dataJob = data[campo] ?? job[campo]
+                if (!dataJob) return false
+                if (Array.isArray(dataJob)) {
+                    if (!dataJob.some(t => t.toLowerCase().includes(filtro))) return false
+                } else {
+                    if (dataJob.toLowerCase() !== filtro) return false
+                }
+            }
+            return true
         })
-    })
+        renderJobs()
+    }
 }
 
 export function renderJobs() {
@@ -97,14 +113,12 @@ export function renderJobs() {
     const container = document.getElementById('jobs-listings');
     container.innerHTML = "";
 
-    const empezarAmostrar = (pageActual - 1) * RESULTS_PAGES
-    const hastaDondeMostrar = empezarAmostrar + RESULTS_PAGES
+    const start = (pageActual - 1) * RESULTS_PAGES
+    const end = start + RESULTS_PAGES
 
-    numbersNav = Math.ceil(allJobs.length / 4)
+    numbersNav = Math.ceil(jobFilter.length / 4)
 
-    const indicesQueSeMuestran = allJobs.slice(empezarAmostrar, hastaDondeMostrar)
-
-    indicesQueSeMuestran.forEach(job => {
+    jobFilter.slice(start, end).forEach(job => {
 
         const div = document.createElement('div');
         div.className = 'res_busqueda';

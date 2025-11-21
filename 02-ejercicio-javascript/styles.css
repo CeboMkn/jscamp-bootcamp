@@ -478,8 +478,14 @@ h1+p {
         background-color: #061627;
     }
 
-    li article {
+    li {
+        display: block;
+        width: 100%;
+    }
+
+    article {
         display: flex;
+        justify-content: space-between;
     }
 
     div a {
