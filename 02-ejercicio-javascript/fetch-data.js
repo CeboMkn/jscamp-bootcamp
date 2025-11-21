@@ -3,14 +3,16 @@ import { renderJobs } from "./filters.js";
 
 export let containers_resultados
 export let allJobs = {}
+export async function getJobs() {
+    await fetch("./data.json")
 
-await fetch("./data.json")
-    
-    .then(res => res.json())
-    .then(jobs => {
-        allJobs = jobs
-        renderJobs()
-    });
+        .then(res => res.json())
+        .then(jobs => {
+            allJobs = jobs
+            renderJobs()
+        });
 
-containers_resultados = document.querySelectorAll('.res_busqueda')
+    containers_resultados = document.querySelectorAll('.res_busqueda')
+}
+
 
