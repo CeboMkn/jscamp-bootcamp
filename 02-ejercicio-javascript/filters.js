@@ -175,9 +175,8 @@ function generateNav() {
 
     if (!container_nav) return;
 
-    container_nav.innerHTML = '';  // limpiar todo
+    container_nav.innerHTML = '';
 
-    // Prev
     const prevLi = document.createElement('li');
     prevLi.innerHTML = `
         <a href=""><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
@@ -191,7 +190,6 @@ function generateNav() {
     if (pageActual === 1) prevLi.classList.add("nav_disabled");
     container_nav.appendChild(prevLi);
 
-    // Números de página
     for (let i = 1; i <= numbersNav; i++) {
 
         const li = document.createElement('li');
@@ -202,18 +200,17 @@ function generateNav() {
         container_nav.appendChild(li);
     }
 
-    // Next
     const nextLi = document.createElement('li');
     nextLi.innerHTML = `
         <a href="">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-                                fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <path d="M9 6l6 6l-6 6" />
-                            </svg>
-                        </a>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round"
+                class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M9 6l6 6l-6 6" />
+            </svg>
+        </a>
     `;
     if (pageActual === numbersNav) nextLi.classList.add("nav_disabled");
 
@@ -239,21 +236,18 @@ function navResultados() {
         const esPrimero = li === lis[0]
         const esUltimo = li === lis[lis.length - 1]
 
-        // Prev
         if (esPrimero && pageActual > 1) {
             pageActual--
             renderJobs()
             return
         }
 
-        // Next
         if (esUltimo && pageActual < numbersNav) {
             pageActual++
             renderJobs()
             return
         }
 
-        // Número
         let numberPage = link.dataset.page
         if (numberPage) {
             pageActual = parseInt(numberPage)
@@ -261,6 +255,7 @@ function navResultados() {
             return
         }
     })
+    paginaActiva()
 }
 
 
