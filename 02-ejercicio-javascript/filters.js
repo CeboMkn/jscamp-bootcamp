@@ -48,7 +48,8 @@ function activar_filtros() {
     /* APLICAR FILTROS A ESCRIBIR */
     input.addEventListener('input', () => {
 
-        filters.text = input.value.toLowerCase()
+        // agregamos un .trim() por si el usuario agrega espacios vacíos
+        filters.text = input.value.toLowerCase().trim()
         aplicar_filtros()
     })
 
@@ -138,6 +139,13 @@ export function renderJobs() {
 
     numbersNav = Math.ceil(jobFilter.length / results_pages)
 
+    /* 
+    createDocumentFragment() lo que hace es crear un contenedor en memoria que sirve para almacenar todos los elementos del DOM que queremos pintar.
+    Para que sirve esto? Para evitar re dibujar el HTML cada vez que insertamos un elemento dentro del forEach. Lo que hacemos es: agregamos los elementos en el contenedor virtual, y una vez estén todos, pintamos de una sola vez lo que hay en el contenedor sobre el DOM.
+    Esto mejora bastante el rendimiento, sobre todo cuando tenemos muchos elementos :)
+    */
+    const documentFragment = document.createDocumentFragment()
+
     jobFilter.slice(start, end).forEach(job => {
 
         const div = document.createElement('div');
@@ -165,8 +173,10 @@ export function renderJobs() {
         </li>
           `;
 
-        container.appendChild(div);
+        documentFragment.appendChild(div);
     });
+
+    container.appendChild(documentFragment)
 
     generateNav()
 }
@@ -190,6 +200,8 @@ function generateNav() {
     if (pageActual === 1) prevLi.classList.add("nav_disabled");
     container_nav.appendChild(prevLi);
 
+    const documentFragment = document.createDocumentFragment()
+
     for (let i = 1; i <= numbersNav; i++) {
 
         const li = document.createElement('li');
@@ -197,7 +209,7 @@ function generateNav() {
 
         if (i === pageActual) li.classList.add('pag_active');
 
-        container_nav.appendChild(li);
+        documentFragment.appendChild(li);
     }
 
     const nextLi = document.createElement('li');
@@ -214,7 +226,8 @@ function generateNav() {
     `;
     if (pageActual === numbersNav) nextLi.classList.add("nav_disabled");
 
-    container_nav.appendChild(nextLi);
+    documentFragment.appendChild(nextLi)
+    container_nav.appendChild(documentFragment)
 }
 
 navResultados()
