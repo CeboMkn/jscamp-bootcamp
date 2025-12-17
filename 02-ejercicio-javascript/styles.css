@@ -593,7 +593,7 @@ h1+p {
             border-radius: 5px;
             transition: background-color 0.2s ease;
 
-            &:hover {
+            &:hover:not(.nav_disabled) {
                 background-color: var(--color-primary-hover);
 
                 a {
@@ -603,6 +603,11 @@ h1+p {
                 a svg {
                     stroke: #fff;
                 }
+            }
+
+            &.nav_disabled {
+                pointer-events: none;
+                opacity: 0.5;
             }
 
             a {
