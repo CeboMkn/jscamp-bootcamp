@@ -19,3 +19,9 @@ Entendemos que por como se pidió el ejercicio, tiene sentido que la lógica est
 
 Por el resto, nos encantó como lo solucionaste!
 Felicidades y a seguir así :)
+
+---
+
+**Comentario**
+
+Muchisimas gracias por los apuntes, estuve intentando separarlo todo pero me lie con variables que tienenq ue utilizar varias funciones, ya estoy con react y ahi si que me estoy organizando muchisimo mejor, espero en los siguientes ejercicio mejorar la limpieza y organización, Gracias :)
