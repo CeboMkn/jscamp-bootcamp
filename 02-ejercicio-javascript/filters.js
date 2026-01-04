@@ -14,6 +14,8 @@ getJobs().then(() => {
 })
 activar_filtros()
 
+/* Generar números de seleccionar número de resultados *****************************************************/ 
+
 const select_num_result = document.getElementById('num_result')
 for (let i = 1; i <= 10; i++) {
     const op = document.createElement('option')
@@ -31,6 +33,8 @@ select_num_result.addEventListener('change', () => {
     renderJobs()
 
 })
+
+/* ********************************************************************************************************* */
 
 let filters = {
     tecnologia: '',
@@ -129,6 +133,8 @@ function activar_filtros() {
     }
 }
 
+/* Renderizar los trabajos **********************************************************************************/
+
 export function renderJobs() {
 
     const container = document.getElementById('jobs-listings');
@@ -181,6 +187,10 @@ export function renderJobs() {
     generateNav()
 }
 
+/* *************************************************************************************************************** */
+
+/* Generar los números de página ***********************************************************************************/
+
 function generateNav() {
 
     if (!container_nav) return;
@@ -230,6 +240,10 @@ function generateNav() {
     container_nav.appendChild(documentFragment)
 }
 
+/* *************************************************************************************************************** */
+
+/* Manejo de cambios de página *************************************************************************************/
+
 navResultados()
 
 function navResultados() {
@@ -271,6 +285,9 @@ function navResultados() {
     paginaActiva()
 }
 
+/* *************************************************************************************************************** */
+
+/* Estilos para la página que está activa **************************************************************************/
 
 function paginaActiva() {
 
@@ -291,3 +308,5 @@ function paginaActiva() {
     if (prevLi) prevLi.classList.toggle('nav_disabled', pageActual === 1);
     if (nextLi) nextLi.classList.toggle('nav_disabled', pageActual === numbersNav);
 }
+
+/* *************************************************************************************************************** */
