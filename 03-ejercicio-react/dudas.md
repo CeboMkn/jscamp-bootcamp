@@ -66,4 +66,4 @@
     saber donde esta cada cosa, a veces peco de organización de más y la gente se lia, nunca he estado en un proyecto conjunto y no se si es buena práctica
     o no organizarlo así, muchas gracias por todo estoy muy contento y he aprendido muchisimo hasta ahora con el curso, sois un equipazo :)
     
-    Perdón, hize los cambios y los subí a main en vez de a una rama aparte
+    Perdón, hize los cambios y los subí a main en vez de a una rama aparte, creo que lo he solucionado
