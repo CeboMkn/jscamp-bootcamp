@@ -1,0 +1,656 @@
+[
+  {
+    "id": "a111f13a-1aa1-4c11-9111-aa1111110001",
+    "titulo": "Backend Developer Node.js",
+    "empresa": "CoreTech Solutions",
+    "ubicacion": "Guadalajara",
+    "descripcion": "Desarrollo de APIs escalables con Node.js y SQL. Colaboración directa con equipos de producto y QA.",
+    "enlace": "",
+    "data": {
+      "tecnologia": [
+        "nodejs",
+        "sql"
+      ],
+      "ubicacion": "guadalajara",
+      "nivel": "semi_senior",
+      "tipo": "tiempo_completo"
+    }
+  },
+  {
+    "id": "b222f24b-2bb2-4d22-a222-bb2222220002",
+    "titulo": "Frontend React Developer",
+    "empresa": "PixelWave Studio",
+    "ubicacion": "Mexico",
+    "descripcion": "Creación de interfaces modernas con React y JavaScript. Participación en proyectos de alto tráfico.",
+    "enlace": "",
+    "data": {
+      "tecnologia": [
+        "react",
+        "javascript"
+      ],
+      "ubicacion": "mexico",
+      "nivel": "junior",
+      "tipo": "temporal"
+    }
+  },
+  {
+    "id": "c333f35c-3cc3-4e33-b333-cc3333330003",
+    "titulo": "Data Analyst SQL",
+    "empresa": "Insight Analytics",
+    "ubicacion": "Remoto",
+    "descripcion": "Análisis de datos complejos y generación de reportes estratégicos mediante SQL.",
+    "enlace": "",
+    "data": {
+      "tecnologia": [
+        "sql"
+      ],
+      "ubicacion": "remoto",
+      "nivel": "senior",
+      "tipo": "freelance"
+    }
+  },
+  {
+    "id": "d444f46d-4dd4-4f44-c444-dd4444440004",
+    "titulo": "Machine Learning Engineer",
+    "empresa": "NeuralTech AI",
+    "ubicacion": "Remoto",
+    "descripcion": "Implementación de modelos con Python y GCP. Optimización de pipelines y análisis avanzado.",
+    "enlace": "",
+    "data": {
+      "tecnologia": [
+        "python",
+        "gcp"
+      ],
+      "ubicacion": "remoto",
+      "nivel": "lead",
+      "tipo": "tiempo_completo"
+    }
+  },
+  {
+    "id": "e555f57e-5ee5-4a55-d555-ee5555550005",
+    "titulo": "Desarrollador iOS Swift",
+    "empresa": "Appify Mobile",
+    "ubicacion": "Guadalajara",
+    "descripcion": "Desarrollo de apps iOS con Swift y UIKit. Implementación de nuevas funciones y soporte básico.",
+    "enlace": "",
+    "data": {
+      "tecnologia": [
+        "swift"
+      ],
+      "ubicacion": "guadalajara",
+      "nivel": "junior",
+      "tipo": "practicas"
+    }
+  },
+  {
+    "id": "f666f68f-6ff6-4b66-e666-ff6666660006",
+    "titulo": "Cloud Engineer AWS",
+    "empresa": "SkyCloud Systems",
+    "ubicacion": "Remoto",
+    "descripcion": "Gestión de infraestructura en AWS y automatizaciones CI/CD. Mejora de rendimiento y seguridad.",
+    "enlace": "",
+    "data": {
+      "tecnologia": [
+        "aws"
+      ],
+      "ubicacion": "remoto",
+      "nivel": "senior",
+      "tipo": "tiempo_completo"
+    }
+  },
+  {
+    "id": "a777f79a-7aa7-4c77-f777-aa7777770007",
+    "titulo": "Fullstack Developer React + Node",
+    "empresa": "NovaTech Global",
+    "ubicacion": "Mexico",
+    "descripcion": "Desarrollo fullstack con React y Node.js. Participación en arquitecturas modernas y escalables.",
+    "enlace": "",
+    "data": {
+      "tecnologia": [
+        "react",
+        "nodejs"
+      ],
+      "ubicacion": "mexico",
+      "nivel": "lead",
+      "tipo": "tiempo_completo"
+    }
+  },
+  {
+    "id": "b888f80b-8bb8-4d88-a888-bb8888880008",
+    "titulo": "Data Scientist R",
+    "empresa": "Insight Analytics",
+    "ubicacion": "Remoto",
+    "descripcion": "Modelado estadístico con R y análisis avanzado. Soporte en decisiones de negocio.",
+    "enlace": "",
+    "data": {
+      "tecnologia": [
+        "erre"
+      ],
+      "ubicacion": "remoto",
+      "nivel": "semi_senior",
+      "tipo": "freelance"
+    }
+  },
+  {
+    "id": "c999f91c-9cc9-4e99-b999-cc9999990009",
+    "titulo": "Android Developer Kotlin",
+    "empresa": "MobileXperience",
+    "ubicacion": "Mexico",
+    "descripcion": "Desarrollo de apps Android con Kotlin. Implementación de mejoras y nuevas características.",
+    "enlace": "",
+    "data": {
+      "tecnologia": [
+        "kotlin"
+      ],
+      "ubicacion": "mexico",
+      "nivel": "junior",
+      "tipo": "temporal"
+    }
+  },
+  {
+    "id": "d010a12d-a1d0-4450-c010-dd0101010010",
+    "titulo": "Backend Python Developer",
+    "empresa": "CodeLinker",
+    "ubicacion": "Guadalajara",
+    "descripcion": "Construcción de APIs con Python y SQL. Integración con sistemas internos y automatizaciones.",
+    "enlace": "",
+    "data": {
+      "tecnologia": [
+        "python",
+        "sql"
+      ],
+      "ubicacion": "guadalajara",
+      "nivel": "semi_senior",
+      "tipo": "tiempo_completo"
+    }
+  },
+  {
+    "id": "e121b23e-b212-4121-d121-ee1212120011",
+    "titulo": "Frontend JavaScript",
+    "empresa": "WebWorks MX",
+    "ubicacion": "Mexico",
+    "descripcion": "Desarrollo de interfaces dinámicas con JavaScript. Integración con APIs y optimización visual.",
+    "enlace": "",
+    "data": {
+      "tecnologia": [
+        "javascript"
+      ],
+      "ubicacion": "mexico",
+      "nivel": "junior",
+      "tipo": "temporal"
+    }
+  },
+  {
+    "id": "f232c34f-c323-4232-e232-ff2323230012",
+    "titulo": "Cloud Engineer Azure",
+    "empresa": "SkyCloud Systems",
+    "ubicacion": "Remoto",
+    "descripcion": "Gestión de servicios en Azure y automatización de entornos. Soporte a arquitecturas distribuidas.",
+    "enlace": "",
+    "data": {
+      "tecnologia": [
+        "azure"
+      ],
+      "ubicacion": "remoto",
+      "nivel": "senior",
+      "tipo": "tiempo_completo"
+    }
+  },
+  {
+    "id": "a343d45a-d434-4343-f343-aa3434340013",
+    "titulo": "SQL Database Engineer",
+    "empresa": "DBSecure Corp",
+    "ubicacion": "Guadalajara",
+    "descripcion": "Optimización de consultas SQL y diseño de bases de datos escalables.",
+    "enlace": "",
+    "data": {
+      "tecnologia": [
+        "sql"
+      ],
+      "ubicacion": "guadalajara",
+      "nivel": "lead",
+      "tipo": "tiempo_completo"
+    }
+  },
+  {
+    "id": "b454e56b-e545-4454-a454-bb4545450014",
+    "titulo": "React UI Developer",
+    "empresa": "FrontDesign MX",
+    "ubicacion": "Mexico",
+    "descripcion": "Construcción de componentes UI con React y JavaScript. Trabajo conjunto con diseño.",
+    "enlace": "",
+    "data": {
+      "tecnologia": [
+        "react",
+        "javascript"
+      ],
+      "ubicacion": "mexico",
+      "nivel": "junior",
+      "tipo": "temporal"
+    }
+  },
+  {
+    "id": "c565f67c-f656-4565-b565-cc5656560015",
+    "titulo": "Cloud Engineer GCP",
+    "empresa": "SkyCloud Systems",
+    "ubicacion": "Remoto",
+    "descripcion": "Diseño de infraestructuras con GCP y automatización constante de procesos cloud.",
+    "enlace": "",
+    "data": {
+      "tecnologia": [
+        "gcp"
+      ],
+      "ubicacion": "remoto",
+      "nivel": "lead",
+      "tipo": "tiempo_completo"
+    }
+  },
+  {
+    "id": "d676a78d-a767-4676-c676-dd6767670016",
+    "titulo": "Python Data Specialist",
+    "empresa": "DataWave",
+    "ubicacion": "Guadalajara",
+    "descripcion": "Procesamiento de datos con Python y generación de insights para producto.",
+    "enlace": "",
+    "data": {
+      "tecnologia": [
+        "python"
+      ],
+      "ubicacion": "guadalajara",
+      "nivel": "semi_senior",
+      "tipo": "tiempo_completo"
+    }
+  },
+  {
+    "id": "e787b89e-b878-4787-d787-ee7878780017",
+    "titulo": "Machine Learning con R",
+    "empresa": "NeuralTech AI",
+    "ubicacion": "Remoto",
+    "descripcion": "Entrenamiento de modelos con R y mejora de predicciones para sistemas internos.",
+    "enlace": "",
+    "data": {
+      "tecnologia": [
+        "erre"
+      ],
+      "ubicacion": "remoto",
+      "nivel": "senior",
+      "tipo": "freelance"
+    }
+  },
+  {
+    "id": "f898c90f-c989-4898-e898-ff8989890018",
+    "titulo": "Backend Node.js Developer",
+    "empresa": "CodeFactory Labs",
+    "ubicacion": "Mexico",
+    "descripcion": "Construcción de microservicios con Node.js y SQL. Enfoque en rendimiento y estabilidad.",
+    "enlace": "",
+    "data": {
+      "tecnologia": [
+        "nodejs",
+        "sql"
+      ],
+      "ubicacion": "mexico",
+      "nivel": "semi_senior",
+      "tipo": "tiempo_completo"
+    }
+  },
+  {
+    "id": "a909d01a-d090-4909-f909-aa9090900019",
+    "titulo": "Python Automation Engineer",
+    "empresa": "DataWave",
+    "ubicacion": "Remoto",
+    "descripcion": "Automatización de procesos internos con Python y despliegues en GCP.",
+    "enlace": "",
+    "data": {
+      "tecnologia": [
+        "python",
+        "gcp"
+      ],
+      "ubicacion": "remoto",
+      "nivel": "semi_senior",
+      "tipo": "temporal"
+    }
+  },
+  {
+    "id": "b010e12b-e101-4010-a010-bb1010100020",
+    "titulo": "iOS Developer Junior",
+    "empresa": "Appify Mobile",
+    "ubicacion": "Guadalajara",
+    "descripcion": "Implementación de nuevas funciones en apps iOS usando Swift.",
+    "enlace": "",
+    "data": {
+      "tecnologia": [
+        "swift"
+      ],
+      "ubicacion": "guadalajara",
+      "nivel": "junior",
+      "tipo": "practicas"
+    }
+  },
+  {
+    "id": "c111aa1a-1111-4dd1-8aa1-c111aa110001",
+    "titulo": "Backend Node.js Engineer",
+    "empresa": "ServerLogic Labs",
+    "ubicacion": "Guadalajara",
+    "descripcion": "Desarrollo de servicios backend en Node.js con integración SQL. Optimización continua del rendimiento.",
+    "enlace": "",
+    "data": {
+      "tecnologia": [
+        "nodejs",
+        "sql"
+      ],
+      "ubicacion": "guadalajara",
+      "nivel": "senior",
+      "tipo": "tiempo_completo"
+    }
+  },
+  {
+    "id": "d222bb2b-2222-4ee2-9bb2-d222bb220002",
+    "titulo": "Frontend React Junior",
+    "empresa": "BrightUI Studio",
+    "ubicacion": "Mexico",
+    "descripcion": "Construcción de interfaces dinámicas con React. Colaboración con diseño y revisión de componentes.",
+    "enlace": "",
+    "data": {
+      "tecnologia": [
+        "react"
+      ],
+      "ubicacion": "mexico",
+      "nivel": "junior",
+      "tipo": "temporal"
+    }
+  },
+  {
+    "id": "e333cc3c-3333-4ff3-acc3-e333cc330003",
+    "titulo": "Data Analyst SQL",
+    "empresa": "AnalyticOne",
+    "ubicacion": "Remoto",
+    "descripcion": "Generación de reportes y análisis de métricas clave mediante SQL. Colaboración con negocio.",
+    "enlace": "",
+    "data": {
+      "tecnologia": [
+        "sql"
+      ],
+      "ubicacion": "remoto",
+      "nivel": "semi_senior",
+      "tipo": "freelance"
+    }
+  },
+  {
+    "id": "f444dd4d-4444-4004-bdd4-f444dd440004",
+    "titulo": "Python ML Engineer",
+    "empresa": "DeepCore AI",
+    "ubicacion": "Remoto",
+    "descripcion": "Entrenamiento de modelos con Python y despliegue en GCP. Experimentación y mejora continua.",
+    "enlace": "",
+    "data": {
+      "tecnologia": [
+        "python",
+        "gcp"
+      ],
+      "ubicacion": "remoto",
+      "nivel": "senior",
+      "tipo": "tiempo_completo"
+    }
+  },
+  {
+    "id": "a555ee5e-5555-4ee5-aee5-a555ee550005",
+    "titulo": "iOS Developer Swift",
+    "empresa": "MobileCraft",
+    "ubicacion": "Guadalajara",
+    "descripcion": "Desarrollo de apps nativas con Swift. Implementación de pantallas y mejoras de usabilidad.",
+    "enlace": "",
+    "data": {
+      "tecnologia": [
+        "swift"
+      ],
+      "ubicacion": "guadalajara",
+      "nivel": "junior",
+      "tipo": "practicas"
+    }
+  },
+  {
+    "id": "b666ff6f-6666-4666-bff6-b666ff660006",
+    "titulo": "Cloud Engineer AWS",
+    "empresa": "CloudOps MX",
+    "ubicacion": "Remoto",
+    "descripcion": "Diseño de infraestructuras en AWS y automatización con CI/CD. Mejora de disponibilidad.",
+    "enlace": "",
+    "data": {
+      "tecnologia": [
+        "aws"
+      ],
+      "ubicacion": "remoto",
+      "nivel": "lead",
+      "tipo": "tiempo_completo"
+    }
+  },
+  {
+    "id": "c777aa7a-7777-4777-8aa7-c777aa770007",
+    "titulo": "Fullstack React & Node",
+    "empresa": "DigitalPulse",
+    "ubicacion": "Mexico",
+    "descripcion": "Construcción de módulos frontend y backend usando React y Node.js. Trabajo en equipo ágil.",
+    "enlace": "",
+    "data": {
+      "tecnologia": [
+        "react",
+        "nodejs"
+      ],
+      "ubicacion": "mexico",
+      "nivel": "semi_senior",
+      "tipo": "tiempo_completo"
+    }
+  },
+  {
+    "id": "d888bb8b-8888-4888-9bb8-d888bb880008",
+    "titulo": "Data Scientist R",
+    "empresa": "StatsFlow",
+    "ubicacion": "Remoto",
+    "descripcion": "Modelado estadístico con R y análisis de datos complejos. Creación de modelos predictivos.",
+    "enlace": "",
+    "data": {
+      "tecnologia": [
+        "erre"
+      ],
+      "ubicacion": "remoto",
+      "nivel": "senior",
+      "tipo": "freelance"
+    }
+  },
+  {
+    "id": "e999cc9c-9999-4999-acc9-e999cc990009",
+    "titulo": "Android Developer Kotlin",
+    "empresa": "AppMotion",
+    "ubicacion": "Mexico",
+    "descripcion": "Desarrollo de funciones móviles usando Kotlin. Optimización de rendimiento y estabilidad.",
+    "enlace": "",
+    "data": {
+      "tecnologia": [
+        "kotlin"
+      ],
+      "ubicacion": "mexico",
+      "nivel": "junior",
+      "tipo": "temporal"
+    }
+  },
+  {
+    "id": "f010dd0d-0101-4010-bdd0-f010dd0d0010",
+    "titulo": "Backend Python Developer",
+    "empresa": "BackLogic",
+    "ubicacion": "Guadalajara",
+    "descripcion": "Desarrollo de APIs con Python y SQL. Integración con componentes internos y externos.",
+    "enlace": "",
+    "data": {
+      "tecnologia": [
+        "python",
+        "sql"
+      ],
+      "ubicacion": "guadalajara",
+      "nivel": "semi_senior",
+      "tipo": "tiempo_completo"
+    }
+  },
+  {
+    "id": "a121ee1e-1212-4121-aee1-a121ee110011",
+    "titulo": "Frontend JavaScript Developer",
+    "empresa": "UXFlow",
+    "ubicacion": "Mexico",
+    "descripcion": "Implementación de interfaces rápidas con JavaScript. Trabajo conjunto con diseño UX/UI.",
+    "enlace": "",
+    "data": {
+      "tecnologia": [
+        "javascript"
+      ],
+      "ubicacion": "mexico",
+      "nivel": "junior",
+      "tipo": "temporal"
+    }
+  },
+  {
+    "id": "b232ff2f-2323-4232-bff2-b232ff220012",
+    "titulo": "Cloud Engineer Azure",
+    "empresa": "BlueCloud Systems",
+    "ubicacion": "Remoto",
+    "descripcion": "Configuración de entornos Azure y automatización de despliegues. Soporte a sistemas críticos.",
+    "enlace": "",
+    "data": {
+      "tecnologia": [
+        "azure"
+      ],
+      "ubicacion": "remoto",
+      "nivel": "senior",
+      "tipo": "tiempo_completo"
+    }
+  },
+  {
+    "id": "c343aa3a-3434-4343-8aa3-c343aa330013",
+    "titulo": "SQL Engineer",
+    "empresa": "DataSecure MX",
+    "ubicacion": "Guadalajara",
+    "descripcion": "Diseño de bases de datos SQL y optimización de consultas. Control de integridad del dato.",
+    "enlace": "",
+    "data": {
+      "tecnologia": [
+        "sql"
+      ],
+      "ubicacion": "guadalajara",
+      "nivel": "lead",
+      "tipo": "tiempo_completo"
+    }
+  },
+  {
+    "id": "d454bb4b-4545-4454-9bb4-d454bb440014",
+    "titulo": "React UI Specialist",
+    "empresa": "CreativeUX",
+    "ubicacion": "Mexico",
+    "descripcion": "Creación de componentes UI reutilizables con React. Atención al detalle visual.",
+    "enlace": "",
+    "data": {
+      "tecnologia": [
+        "react",
+        "javascript"
+      ],
+      "ubicacion": "mexico",
+      "nivel": "junior",
+      "tipo": "temporal"
+    }
+  },
+  {
+    "id": "e565cc5c-5656-4565-acc5-e565cc550015",
+    "titulo": "Cloud Engineer GCP",
+    "empresa": "CloudMasters",
+    "ubicacion": "Remoto",
+    "descripcion": "Implementación de soluciones cloud en GCP. Creación de pipelines automáticos.",
+    "enlace": "",
+    "data": {
+      "tecnologia": [
+        "gcp"
+      ],
+      "ubicacion": "remoto",
+      "nivel": "lead",
+      "tipo": "tiempo_completo"
+    }
+  },
+  {
+    "id": "f676dd6d-6767-4676-bdd6-f676dd660016",
+    "titulo": "Python Data Engineer",
+    "empresa": "DataBridge",
+    "ubicacion": "Guadalajara",
+    "descripcion": "Construcción de pipelines de datos con Python. Procesamiento y análisis continuo.",
+    "enlace": "",
+    "data": {
+      "tecnologia": [
+        "python"
+      ],
+      "ubicacion": "guadalajara",
+      "nivel": "semi_senior",
+      "tipo": "tiempo_completo"
+    }
+  },
+  {
+    "id": "a787ee7e-7878-4787-aee7-a787ee770017",
+    "titulo": "R Data Specialist",
+    "empresa": "Predictive Labs",
+    "ubicacion": "Remoto",
+    "descripcion": "Análisis y modelado estadístico con R. Generación de insights clave para negocio.",
+    "enlace": "",
+    "data": {
+      "tecnologia": [
+        "erre"
+      ],
+      "ubicacion": "remoto",
+      "nivel": "senior",
+      "tipo": "freelance"
+    }
+  },
+  {
+    "id": "b898ff8f-8989-4898-bff8-b898ff880018",
+    "titulo": "Node.js API Engineer",
+    "empresa": "BackendForge",
+    "ubicacion": "Mexico",
+    "descripcion": "Construcción de APIs escalables con Node.js. Mantenimiento de microservicios críticos.",
+    "enlace": "",
+    "data": {
+      "tecnologia": [
+        "nodejs"
+      ],
+      "ubicacion": "mexico",
+      "nivel": "semi_senior",
+      "tipo": "tiempo_completo"
+    }
+  },
+  {
+    "id": "c909aa9a-9090-4909-8aa9-c909aa990019",
+    "titulo": "Python Automation Specialist",
+    "empresa": "DataWave MX",
+    "ubicacion": "Remoto",
+    "descripcion": "Automatización de procesos con Python y despliegues en GCP. Soporte a herramientas internas.",
+    "enlace": "",
+    "data": {
+      "tecnologia": [
+        "python",
+        "gcp"
+      ],
+      "ubicacion": "remoto",
+      "nivel": "semi_senior",
+      "tipo": "temporal"
+    }
+  },
+  {
+    "id": "d010bb0b-b0b0-4010-9bb0-d010bb0b0020",
+    "titulo": "iOS Developer Practitioner",
+    "empresa": "Appify Mobile",
+    "ubicacion": "Guadalajara",
+    "descripcion": "Implementación de módulos básicos en apps iOS con Swift. Soporte en tareas de desarrollo.",
+    "enlace": "",
+    "data": {
+      "tecnologia": [
+        "swift"
+      ],
+      "ubicacion": "guadalajara",
+      "nivel": "junior",
+      "tipo": "practicas"
+    }
+  }
+]
