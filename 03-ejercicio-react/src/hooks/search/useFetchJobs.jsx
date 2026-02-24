@@ -1,7 +1,16 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { saveFilters } from "./saveFiltersLocalStorage.jsx"
 
-export function useFetchJobs(setJobs, setTotal, setLoading, currentPage, filters, RESULTS_PER_PAGE) {
+/* 
+Siempre hay que evitar pasar setters a los custom hooks, eso los hace muy dependientes de otro hook o estado.
+Si vemos `useFilters`, ese hook estaba creando los estados de jobs, total y loading, pero sus setters SOLO se usaban en el `useFetchJobs`. Esto nos da una pauta de que podemos extraer esos estados de `useFilters` y que `useFetchJobs` se encargue de pedir los datos y de actualizar los estados.
+Ahora el hook no recibe setters y además devuelve la data que queremos.
+Esto lo hace más limpio y más fácil de usar.
+*/
+export function useFetchJobs(currentPage, filters, RESULTS_PER_PAGE) {
+    const [jobs, setJobs] = useState([])
+    const [total, setTotal] = useState(0)
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         async function fetchJobs() {
@@ -48,4 +57,8 @@ export function useFetchJobs(setJobs, setTotal, setLoading, currentPage, filters
         }
         fetchJobs()
     }, [filters, currentPage])
+
+    return {
+        jobs, total, loading
+    }
 }
