@@ -15,6 +15,7 @@ export const useInfoFilters = ({ onFilters, filters }) => {
         if (name === 'search') {
             setSearchUI(value)
 
+            /* Excelente! Muy bien hecho */
             clearTimeout(debounceRef.current)
 
             debounceRef.current = setTimeout(() => {
