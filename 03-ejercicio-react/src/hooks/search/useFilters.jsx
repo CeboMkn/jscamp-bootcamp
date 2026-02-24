@@ -2,15 +2,40 @@ import { useState } from 'react';
 import { useFetchJobs } from './useFetchJobs';
 
 export const useFilters = (RESULTS_PER_PAGE) => {
-
-
-    const [jobs, setJobs] = useState([])
-    const [total, setTotal] = useState(0)
-    const [loading, setLoading] = useState(false)
     const [currentPage, setCurrentPage] = useState(1)
-    const [filters, setToFilters] = useState(() => {
-        
-        const readUrl = new URLSearchParams(window.location.search)
+    const [filters, setToFilters] = useState(getInitialFilters()) // Podemos extraer la lógica de la inicialización de los filtros en una función para que no se vea tan cargado el hook y que sea más fácil de leer
+
+    const { jobs, loading, total } = useFetchJobs(currentPage, filters, RESULTS_PER_PAGE)
+
+    const totalPages = Math.ceil(total / RESULTS_PER_PAGE)
+
+    const handleFilters = (filtersAdd) => {
+        setToFilters(filtersAdd)
+        setCurrentPage(1)
+    }
+
+    /* Siempre evitemos devovler setters, lo que podemos hacer es crear una función agregando limitantes al comportamiento que queremos que tenga */
+    const handleSetCurrentPage = (page) => {
+        if (page < 1) return
+        if (page > totalPages) return
+        setCurrentPage(page)
+    }
+
+    return {
+        loading,
+        filters,
+        currentPage,
+        handleSetCurrentPage,
+        jobs,
+        total,
+        totalPages,
+        handleFilters
+
+    }
+}
+
+const getInitialFilters = () => {
+  const readUrl = new URLSearchParams(window.location.search)
         if (readUrl.size > 2) {
             return {
                 search: readUrl.get('text') || '',
@@ -37,26 +62,4 @@ export const useFilters = (RESULTS_PER_PAGE) => {
             ubicacion: params.get('type') || '',
             nivel: params.get('level') || ''
         }
-    })
-
-    const totalPages = Math.ceil(total / RESULTS_PER_PAGE)
-
-    useFetchJobs(setJobs, setTotal, setLoading, currentPage, filters, RESULTS_PER_PAGE)
-
-    const handleFilters = (filtersAdd) => {
-        setToFilters(filtersAdd)
-        setCurrentPage(1)
-    }
-
-    return {
-        loading,
-        filters,
-        currentPage,
-        setCurrentPage,
-        jobs,
-        total,
-        totalPages,
-        handleFilters
-
-    }
 }
