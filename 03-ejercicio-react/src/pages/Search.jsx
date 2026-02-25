@@ -1,4 +1,5 @@
 import '../App.css'
+import { DEFAULT_FILTERS } from '../config.js';
 import { JobListing } from '../components/JobListing.jsx';
 import { Pagination } from '../components/Pagination.jsx';
 import { SearchFormSection } from '../components/SearchFormSection.jsx';
@@ -6,11 +7,12 @@ import { MostrandoNumRresults } from '../components/MostrandoNumResults.jsx';
 import { useFilters } from '../hooks/search/useFilters.jsx';
 import { useDocumentTitle } from '../hooks/global/useDocumentTitle.js';
 
-/* No está mal dejarlo dentro del cuerpo del componente, pero todo lo que sean constantes inmutables, está bueno que estén fuera para evitar que se vuelva a crear el valor al renderizar el componente */
-const RESULTS_PER_PAGE = 4
+/* No está mal dejarlo dentro del cuerpo del componente, pero todo lo que sean constantes inmutables, 
+está bueno que estén fuera para evitar que se vuelva a crear el valor al renderizar el componente */
 
 /*
-Una mejora que podemos hacer (no es necesario, con esto ya está muy bien) es crear un archivo `config.js` que contenga todas las constantes que se usen en la aplicación.
+Una mejora que podemos hacer (no es necesario, con esto ya está muy bien) es crear un archivo `config.js` 
+que contenga todas las constantes que se usen en la aplicación.
 
 Por ejemplo, tener un:
 
@@ -45,7 +47,7 @@ export function SearchPage() {
     total,
     totalPages,
     handleFilters
-  } = useFilters(RESULTS_PER_PAGE)
+  } = useFilters()
 
   return (
     <main className="main_estrecho">
@@ -57,7 +59,7 @@ export function SearchPage() {
 
         <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handleSetCurrentPage} />
 
-        <MostrandoNumRresults currentPage={currentPage} results={RESULTS_PER_PAGE} jobs={total} />
+        <MostrandoNumRresults currentPage={currentPage} jobs={total} />
 
       </div>
     </main>

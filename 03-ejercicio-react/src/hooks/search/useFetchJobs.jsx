@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
+import { DEFAULT_FILTERS } from "../../config.js";
 import { saveFilters } from "./saveFiltersLocalStorage.jsx"
 
 /* 
 Siempre hay que evitar pasar setters a los custom hooks, eso los hace muy dependientes de otro hook o estado.
-Si vemos `useFilters`, ese hook estaba creando los estados de jobs, total y loading, pero sus setters SOLO se usaban en el `useFetchJobs`. Esto nos da una pauta de que podemos extraer esos estados de `useFilters` y que `useFetchJobs` se encargue de pedir los datos y de actualizar los estados.
+Si vemos `useFilters`, ese hook estaba creando los estados de jobs, total y loading, pero sus setters SOLO se usaban en el `useFetchJobs`. 
+Esto nos da una pauta de que podemos extraer esos estados de `useFilters` y que `useFetchJobs` se encargue de pedir los datos y de actualizar los estados.
 Ahora el hook no recibe setters y además devuelve la data que queremos.
 Esto lo hace más limpio y más fácil de usar.
 */
-export function useFetchJobs(currentPage, filters, RESULTS_PER_PAGE) {
+export function useFetchJobs(currentPage, filters) {
+    const resultPerPage = DEFAULT_FILTERS.RESULTS_PER_PAGE
     const [jobs, setJobs] = useState([])
     const [total, setTotal] = useState(0)
     const [loading, setLoading] = useState(false)
@@ -25,8 +28,8 @@ export function useFetchJobs(currentPage, filters, RESULTS_PER_PAGE) {
                 if (filters.ubicacion) params.append('type', filters.ubicacion)
                 if (filters.nivel) params.append('level', filters.nivel)
 
-                const offset = (currentPage - 1) * RESULTS_PER_PAGE
-                params.append('limit', RESULTS_PER_PAGE)
+                const offset = (currentPage - 1) * resultPerPage
+                params.append('limit', resultPerPage)
                 params.append('offset', offset)
 
                 const queryParams = params.toString()

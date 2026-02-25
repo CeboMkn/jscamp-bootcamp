@@ -1,5 +1,5 @@
 import { useCurrentPath } from "../hooks/global/useCurrentPath";
-import { Link } from "./link";
+import { Link } from "./Link";
 
 export function Header() {
 

@@ -1,13 +1,15 @@
 import { useState } from 'react';
 import { useFetchJobs } from './useFetchJobs';
-
-export const useFilters = (RESULTS_PER_PAGE) => {
+import { DEFAULT_FILTERS } from '../../config';
+S
+export const useFilters = () => {
+    const resultsPerPage = DEFAULT_FILTERS.RESULTS_PER_PAGE
     const [currentPage, setCurrentPage] = useState(1)
     const [filters, setToFilters] = useState(getInitialFilters()) // Podemos extraer la lógica de la inicialización de los filtros en una función para que no se vea tan cargado el hook y que sea más fácil de leer
 
-    const { jobs, loading, total } = useFetchJobs(currentPage, filters, RESULTS_PER_PAGE)
+    const { jobs, loading, total } = useFetchJobs(currentPage, filters, resultsPerPage)
 
-    const totalPages = Math.ceil(total / RESULTS_PER_PAGE)
+    const totalPages = Math.ceil(total / resultsPerPage)
 
     const handleFilters = (filtersAdd) => {
         setToFilters(filtersAdd)
