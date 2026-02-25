@@ -57,7 +57,6 @@ export function useFetchJobs(currentPage, filters) {
             } finally {
 
                 setLoading(false)
-
             }
         }
         fetchJobs()
