@@ -7,10 +7,7 @@ export function Pagination({ currentPage = 1, totalPages = 1, onPageChange }) {
     const isFirstPage = currentPage === 1;
     const isLastPage = currentPage === totalPages;
 
-    const stylePrevButton = isFirstPage ? { pointerEvents: 'none', opacity: 0.5 } : {}
-    const styleNextButton = isLastPage ? { pointerEvents: 'none', opacity: 0.5 } : {}
-
-    const handlePrevClick = (e) => {
+    /* const handlePrevClick = (e) => {
         e.preventDefault()
         if (!isFirstPage) {
             onPageChange(currentPage - 1)
@@ -21,21 +18,26 @@ export function Pagination({ currentPage = 1, totalPages = 1, onPageChange }) {
         e.preventDefault()
         if (!isLastPage)
             onPageChange(currentPage + 1)
+    } */
+
+    const handleChangePage = (page) => (e) => {
+        e.preventDefault()
+        onPageChange(page)
     }
 
-    const handleChangePage = (e) => {
+    /* const handleChangeNumberPage = (page) => (e) => {
         e.preventDefault()
         const page = Number(e.target.dataset.page)
         if (page !== currentPage) {
             onPageChange(page)
         }
-    }
+    } */
 
     return (
         <nav className={styles.paginacion}>
             <ul>
-                <li style={stylePrevButton}>
-                    <a href="#" onClick={handlePrevClick}>
+                <li className={isFirstPage ? styles.buttonDisabled : ''}>
+                    <a href="#" onClick={handleChangePage(currentPage - 1)}>
                         <svg
                             width="18"
                             height="18"
@@ -58,14 +60,14 @@ export function Pagination({ currentPage = 1, totalPages = 1, onPageChange }) {
                         key={page}
                         className={currentPage === page ? styles.pagActive : ''}>
                         <a href="#"
-                            data-page={page}
-                            onClick={handleChangePage}>{page}
+                            /* data-page={page} */
+                            onClick={handleChangePage(page)}>{page}
                         </a>
                     </li>
                 ))}
 
-                <li style={styleNextButton}>
-                    <a href="#" onClick={handleNextClick}>
+                <li className={isLastPage ? styles.buttonDisabled : ''}>
+                    <a href="#" onClick={handleChangePage(currentPage + 1)}>
                         <svg
                             width="18"
                             height="18"

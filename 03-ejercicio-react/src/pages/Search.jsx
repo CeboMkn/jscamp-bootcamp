@@ -1,5 +1,4 @@
 import '../App.css'
-import { DEFAULT_FILTERS } from '../config.js';
 import { JobListing } from '../components/JobListing.jsx';
 import { Pagination } from '../components/Pagination.jsx';
 import { SearchFormSection } from '../components/SearchFormSection.jsx';

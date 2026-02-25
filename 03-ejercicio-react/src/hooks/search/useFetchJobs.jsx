@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { DEFAULT_FILTERS } from "../../config.js";
 import { saveFilters } from "./saveFiltersLocalStorage.jsx"
+import { showToast } from "../global/toast/toast.js";
 
 /* 
 Siempre hay que evitar pasar setters a los custom hooks, eso los hace muy dependientes de otro hook o estado.
@@ -41,6 +42,7 @@ export function useFetchJobs(currentPage, filters) {
 
                 if (!response.ok) {
                     throw new Error(`HTTP ${response.status}`)
+
                 }
 
                 const json = await response.json()
@@ -49,7 +51,7 @@ export function useFetchJobs(currentPage, filters) {
                 setTotal(json.total)
 
             } catch (error) {
-
+                showToast('Error al pedir los trabajos', 'error')
                 console.log('Error al pedir los trabajos')
 
             } finally {

@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDocumentTitle } from "../global/useDocumentTitle.js";
+import { showToast } from "../global/toast/toast.js";
 
 export function useContactForm() {
 
@@ -28,6 +29,15 @@ export function useContactForm() {
 
     /* ESTADO DEL ENVIO (ENVIAR, ENVIANDO O ENVIADO) */
     const [sendStatus, setSendStatus] = useState('enviar')
+    useEffect(() => {
+        if (sendStatus === 'enviado') {
+            showToast('¡Mensaje enviado con éxito!', 'success')
+        }
+        if (sendStatus === 'error') {
+            showToast('Error al enviar el mensaje, pruebe más tarde', 'error')
+        }
+    }, [sendStatus])
+
 
     /* SEGUN ESTADO CAMBIA EL TITLE */
     const titleByStatus = {

@@ -10,10 +10,14 @@ export function ContactPage() {
         showValidation,
         handleChange,
         handleSubmit
-    } = useContactForm() // Buenisimo!! Muy bien hecho lo de las validaciones :) Más adelante para darte un pequeño spoiler, vamos a trabajar con zod (https://zod.dev/). Es una librería que se usa muchisimo para validar datos. De esta manera no tenemos que andar con regex, ni controlando muy a mano los mensajes de error ni nada. Es muy útil y fácil de usar. Spoiler dado para que no tengas miedo con los formularios en React jeje
+    } = useContactForm() // Buenisimo!! Muy bien hecho lo de las validaciones :) Más adelante para darte un pequeño spoiler, 
+    // vamos a trabajar con zod (https://zod.dev/). Es una librería que se usa muchisimo para validar datos. De esta manera 
+    // no tenemos que andar con regex, ni controlando muy a mano los mensajes de error ni nada. Es muy útil y fácil de usar. 
+    // Spoiler dado para que no tengas miedo con los formularios en React jeje
 
     return (
         <main className="main_estrecho">
+            
             <div className={styles.contactCenter}>
                 <div className={styles.textPrincipal}>
                     <h1>¿Tienes alguna pregunta?</h1>
@@ -21,7 +25,6 @@ export function ContactPage() {
                 </div>
                 <section className={styles.formContact}>
                     <form onSubmit={handleSubmit}>
-
                         <section className={styles.formLabels}>
                             <div>
                                 <div

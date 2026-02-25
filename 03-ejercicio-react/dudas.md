@@ -32,6 +32,12 @@
 
 <!-- Dudas del ejercicio extra -->
 
+
+
+
+
+<!-- ---------------------------------------------------------------------------------------------------------------------------------- -->
+
  Hola :), he añadido varias cosas que he aprendido en el curso y algunas que he investigado por mi cuenta
 
     1.- Se puede buscar desde el input de la página de HOME

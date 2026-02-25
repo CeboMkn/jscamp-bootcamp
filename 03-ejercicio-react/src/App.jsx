@@ -3,6 +3,7 @@ import { Route } from './hooks/router/Route.jsx';
 import { Header } from './components/Header.jsx';
 import { Footer } from './components/Footer.jsx';
 
+import  ToastContainer  from './hooks/global/toast/ToastContainer.jsx';
 import { HomePage } from './pages/Home.jsx';
 import { SearchPage } from './pages/Search.jsx';
 import { ContactPage } from './pages/Contact.jsx';
@@ -14,6 +15,7 @@ export function App() {
     <>
       <div className='organized'>
         <Header />
+        <ToastContainer />
         <Route path="/" component={HomePage} />
         <Route path="/search" component={SearchPage} />
         <Route path="/contact" component={ContactPage} />

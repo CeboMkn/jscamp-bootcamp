@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useFetchJobs } from './useFetchJobs';
 import { DEFAULT_FILTERS } from '../../config';
-S
+
 export const useFilters = () => {
     const resultsPerPage = DEFAULT_FILTERS.RESULTS_PER_PAGE
     const [currentPage, setCurrentPage] = useState(1)
@@ -18,8 +18,7 @@ export const useFilters = () => {
 
     /* Siempre evitemos devovler setters, lo que podemos hacer es crear una función agregando limitantes al comportamiento que queremos que tenga */
     const handleSetCurrentPage = (page) => {
-        if (page < 1) return
-        if (page > totalPages) return
+        if (page < 1 || page > totalPages || page === currentPage) return
         setCurrentPage(page)
     }
 
@@ -37,31 +36,31 @@ export const useFilters = () => {
 }
 
 const getInitialFilters = () => {
-  const readUrl = new URLSearchParams(window.location.search)
-        if (readUrl.size > 2) {
-            return {
-                search: readUrl.get('text') || '',
-                tecnologia: readUrl.get('technology') || '',
-                ubicacion: readUrl.get('type') || '',
-                nivel: readUrl.get('level') || ''
-            }
-        }
-
-        const saved = localStorage.getItem('jobsFilters')
-        if (!saved) {
-            return {
-                search: '',
-                tecnologia: '',
-                ubicacion: '',
-                nivel: ''
-            }
-        }
-
-        const params = new URLSearchParams(saved)
+    const readUrl = new URLSearchParams(window.location.search)
+    if (readUrl.size > 2) {
         return {
-            search: params.get('text') || '',
-            tecnologia: params.get('technology') || '',
-            ubicacion: params.get('type') || '',
-            nivel: params.get('level') || ''
+            search: readUrl.get('text') || '',
+            tecnologia: readUrl.get('technology') || '',
+            ubicacion: readUrl.get('type') || '',
+            nivel: readUrl.get('level') || ''
         }
+    }
+
+    const saved = localStorage.getItem('jobsFilters')
+    if (!saved) {
+        return {
+            search: '',
+            tecnologia: '',
+            ubicacion: '',
+            nivel: ''
+        }
+    }
+
+    const params = new URLSearchParams(saved)
+    return {
+        search: params.get('text') || '',
+        tecnologia: params.get('technology') || '',
+        ubicacion: params.get('type') || '',
+        nivel: params.get('level') || ''
+    }
 }
