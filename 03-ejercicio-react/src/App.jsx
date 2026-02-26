@@ -1,5 +1,4 @@
 import { Route } from './hooks/router/Route.jsx';
-
 import { Header } from './components/Header.jsx';
 import { Footer } from './components/Footer.jsx';
 
