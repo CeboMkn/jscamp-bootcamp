@@ -33,10 +33,30 @@
 <!-- Dudas del ejercicio extra -->
 
 
+<!-- ------------------------------------------------- SEGUNDA CORRECCIÓN ----------------------------------------------------------- -->
+
+Hola, lo primero muchas gracias por tus palabras, me animan muchismo ^^
+He realizado los cambios que me comentas
+
+Grácias al comentario de no pasar setters en useFilters.jsx me dio una idea para mejorar en manejo de cambio de páginas en el nav,
+ahora solo con un handle en Pagination.jsx manejo el cambio con las flechas al pulsar los números y me he ahorrado un montón de líneas, que soy 
+un poco esquisito con eso, intento invertir el máximo tiempo en la refactorización del código para que con las mínimas líneas se 
+haga el comportamiento que necesito.
+
+También he conseguido hacer en Toast, creo que lo he realizado bien, he añadido el componente en app.jsx, entonces está en cualquier página
+y simplemente con que lo llames cuando lo necesites y le pases el mensaje funciona, gracias por tus consejos, lo he implementado en useFetchJobs.jsx
+y a la hora de rellenar el formulario en Contact.jsx, segun el estado de enviado o error
+
+Increible el añadir los path dinámicamente en en Router con un set, te ahorra muchisimo trabajo, gracias.
+
+Tambien he añadido el archivo config.js, nose si es así como me lo comentabas, de momento solo esta esa constante de resultados por página
+aunque me gustaria que tambien se pudiera cambiar con un select en la página Search con un mínimo y un máximo para que el usuario pueda elegir
+cuantos resultados por página quiere ver, nose si teniendolo en el config esa parte tambien es viable, o incluso he llegado a pensar en añadir
+los filtros en el config pero no me convence, a ver si puedes resolver mis dudas. También me surge la duda de como hacer para que si son
+muchisimas páginas en el nav, por ejemplo 30 porque hay muchisimos trabajo,  muchisimas gracias por todo :)
 
 
-
-<!-- ---------------------------------------------------------------------------------------------------------------------------------- -->
+<!-- --------------------------------------------------- PRIMERA CORRECCIÓN --------------------------------------------------------- -->
 
  Hola :), he añadido varias cosas que he aprendido en el curso y algunas que he investigado por mi cuenta
 
