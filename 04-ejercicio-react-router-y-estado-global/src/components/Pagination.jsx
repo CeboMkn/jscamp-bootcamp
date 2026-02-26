@@ -1,90 +1,90 @@
-import styles from './Pagination.module.css'
+import styles from '../css_module/Pagination.module.css'
 
-export function Pagination({ currentPage = 1, totalPages = 10, onPageChange }) {
-  // generar un array de páginas a mostrar
-  const pages = Array.from({ length: totalPages }, (_, i) => i + 1)
+export function Pagination({ currentPage = 1, totalPages = 1, onPageChange }) {
 
-  const isFirstPage = currentPage === 1
-  const isLastPage = currentPage === totalPages
+    const pages = Array.from({ length: totalPages }, (_, i) => i + 1)
 
-  const stylePrevButton = isFirstPage ? { pointerEvents: 'none', opacity: 0.5 } : {}
-  const styleNextButton = isLastPage ? { pointerEvents: 'none', opacity: 0.5 } : {}
+    const isFirstPage = currentPage === 1;
+    const isLastPage = currentPage === totalPages;
 
-  const handlePrevClick = (event) => {
-    event.preventDefault()
-    if (isFirstPage === false) {
-      onPageChange(currentPage - 1)
+    /* const handlePrevClick = (e) => {
+        e.preventDefault()
+        if (!isFirstPage) {
+            onPageChange(currentPage - 1)
+        }
     }
-  }
 
-  const handleNextClick = (event) => {
-    event.preventDefault()
-    if (isLastPage === false) {
-      onPageChange(currentPage + 1)
+    const handleNextClick = (e) => {
+        e.preventDefault()
+        if (!isLastPage)
+            onPageChange(currentPage + 1)
+    } */
+
+    const handleChangePage = (page) => (e) => {
+        e.preventDefault()
+        onPageChange(page)
     }
-  }
 
-  const handleChangePage = (event) => {
-    event.preventDefault()
-    const page = Number(event.target.dataset.page)
+    /* const handleChangeNumberPage = (page) => (e) => {
+        e.preventDefault()
+        const page = Number(e.target.dataset.page)
+        if (page !== currentPage) {
+            onPageChange(page)
+        }
+    } */
 
-    if (page !== currentPage) {
-      onPageChange(page)
-    }
-  }
+    return (
+        <nav className={styles.paginacion}>
+            <ul>
+                <li className={isFirstPage ? styles.buttonDisabled : ''}>
+                    <a href="#" onClick={handleChangePage(currentPage - 1)}>
+                        <svg
+                            width="18"
+                            height="18"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="#fff"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="icon icon-tabler icons-tabler-outline icon-tabler-chevron-left"
+                        >
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M15 6l-6 6l6 6" />
+                        </svg>
+                    </a>
+                </li>
 
-  const buildPageUrl = (page) => {
-    const url = new URL(window.location)
-    url.searchParams.set('page', page)
-    return `${url.pathname}?${url.searchParams.toString()}`
-  }
+                {pages.map(page => (
+                    <li
+                        key={page}
+                        className={currentPage === page ? styles.pagActive : ''}>
+                        <a href="#"
+                            /* data-page={page} */
+                            onClick={handleChangePage(page)}>{page}
+                        </a>
+                    </li>
+                ))}
 
-  return (
-    <nav className={styles.pagination}>
-      <a href={buildPageUrl(currentPage - 1)} style={stylePrevButton} onClick={handlePrevClick}>
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-          <path d="M15 6l-6 6l6 6" />
-        </svg>
-      </a>
-
-      {pages.map((page) => (
-        <a
-          key={page}
-          data-page={page}
-          href={buildPageUrl(page)}
-          className={currentPage === page ? styles.isActive : ''}
-          onClick={handleChangePage}
-        >
-          {page}
-        </a>
-      ))}
-
-      <a href={buildPageUrl(currentPage + 1)} style={styleNextButton} onClick={handleNextClick}>
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right"
-        >
-          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-          <path d="M9 6l6 6l-6 6" />
-        </svg>
-      </a>
-    </nav>
-  )
+                <li className={isLastPage ? styles.buttonDisabled : ''}>
+                    <a href="#" onClick={handleChangePage(currentPage + 1)}>
+                        <svg
+                            width="18"
+                            height="18"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="#fff"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right"
+                        >
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M9 6l6 6l-6 6" />
+                        </svg>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    )
 }

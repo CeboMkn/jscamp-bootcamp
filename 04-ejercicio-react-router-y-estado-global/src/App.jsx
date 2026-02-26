@@ -1,19 +1,27 @@
-import { Header } from './components/Header.jsx'
-import { Footer } from './components/Footer.jsx'
+import { Route } from './hooks/router/Route.jsx';
+import { Header } from './components/Header.jsx';
+import { Footer } from './components/Footer.jsx';
 
-import { HomePage } from './pages/Home.jsx'
-import { SearchPage } from './pages/Search.jsx'
-import { Route } from './components/Route.jsx'
+import  ToastContainer  from './hooks/global/toast/ToastContainer.jsx';
 
-function App() {
+import { HomePage } from './pages/Home.jsx';
+import { SearchPage } from './pages/Search.jsx';
+import { ContactPage } from './pages/Contact.jsx';
+import { ErrorPage } from './pages/404.jsx'
+
+export function App() {
+
   return (
     <>
-      <Header />
-      <Route path="/" component={HomePage} />
-      <Route path="/search" component={SearchPage} />
-      <Footer />
+      <div className='organized'>
+        <Header />
+        <ToastContainer />
+        <Route path="/" component={HomePage} />
+        <Route path="/search" component={SearchPage} />
+        <Route path="/contact" component={ContactPage} />
+        <Route path="*" component={ErrorPage} codeError="notFound" />
+        <Footer />
+      </div>
     </>
   )
 }
-
-export default App

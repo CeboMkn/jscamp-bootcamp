@@ -1,32 +1,26 @@
-import { useState } from 'react'
-
 export function JobCard({ job }) {
-  const [isApplied, setIsApplied] = useState(false)
+    return (
+        <div className="res_busqueda">
+            <li>
+                <article>
+                    <div>
+                        <a href={job.enlace || "#"}>
+                            <h3 className="title_job">{job.titulo}</h3>
+                        </a>
 
-  const handleApplyClick = () => {
-    setIsApplied(true)
-  }
+                        <small className="first_p">
+                            {job.empresa} | {job.ubicacion}
+                        </small>
 
-  const buttonClasses = isApplied ? 'button-apply-job is-applied' : 'button-apply-job'
-  const buttonText = isApplied ? 'Aplicado' : 'Aplicar'
-
-  return (
-    <article
-      className="job-listing-card"
-      data-modalidad={job.data.modalidad}
-      data-nivel={job.data.nivel}
-      data-technology={job.data.technology}
-    >
-      <div>
-        <h3>{job.titulo}</h3>
-        <small>
-          {job.empresa} | {job.ubicacion}
-        </small>
-        <p>{job.descripcion}</p>
-      </div>
-      <button className={buttonClasses} onClick={handleApplyClick}>
-        {buttonText}
-      </button>
-    </article>
-  )
+                        <p className="second_p">{job.descripcion}</p>
+                    </div>
+                    <div>
+                        <button className="btn_info btn_active" type="button">
+                            Aplicar
+                        </button>
+                    </div>
+                </article>
+            </li>
+        </div>
+    )
 }

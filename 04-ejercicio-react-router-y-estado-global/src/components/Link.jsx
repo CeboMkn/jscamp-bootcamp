@@ -1,16 +1,17 @@
-import { useRouter } from '../hooks/useRouter'
+import { useRouter } from "../hooks/router/useRouter"
 
-export function Link({ href, children, ...restOfProps }) {
-  const { navigateTo } = useRouter()
+export function Link({ href, children, ...restProps }) {
 
-  const handleClick = (event) => {
-    event.preventDefault()
-    navigateTo(href)
-  }
+    const { navigateTo } = useRouter()
 
-  return (
-    <a href={href} {...restOfProps} onClick={handleClick}>
-      {children}
-    </a>
-  )
+    const handleClick = (e) => {
+        e.preventDefault()
+        navigateTo(href)
+    }
+
+    return (
+        <a href={href} {...restProps} onClick={handleClick}>
+            {children}
+        </a>
+    )
 }
