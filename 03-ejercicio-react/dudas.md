@@ -43,11 +43,11 @@ ahora solo con un handle en Pagination.jsx manejo el cambio con las flechas al p
 un poco esquisito con eso, intento invertir el máximo tiempo en la refactorización del código para que con las mínimas líneas se 
 haga el comportamiento que necesito.
 
-También he conseguido hacer en Toast, creo que lo he realizado bien, he añadido el componente en app.jsx, entonces está en cualquier página
+También he conseguido hacer en Toast, creo que lo he realizado bien, he añadido el componente <ToastContainer/> en app.jsx, entonces está en cualquier página
 y simplemente con que lo llames cuando lo necesites y le pases el mensaje funciona, gracias por tus consejos, lo he implementado en useFetchJobs.jsx
 y a la hora de rellenar el formulario en Contact.jsx, segun el estado de enviado o error
 
-Increible el añadir los path dinámicamente en en Router con un set, te ahorra muchisimo trabajo, gracias.
+Increible el añadir los path dinámicamente en en Router con un set, te ahorra muchisimo trabajo.
 
 Tambien he añadido el archivo config.js, nose si es así como me lo comentabas, de momento solo esta esa constante de resultados por página
 aunque me gustaria que tambien se pudiera cambiar con un select en la página Search con un mínimo y un máximo para que el usuario pueda elegir
