@@ -1,6 +1,12 @@
-import styles from "../css_module/Spinner.module.css"
+import styles from "./Spinner.module.css"
 
-export function Spinner() {
+export function Spinner({ position = false }) {
 
-    return (<div className={styles.env_spinner}><div className={styles.spinner}></div></div>)
+    return (
+        <div className={position ? styles.env_spinnerP : styles.env_spinner}>
+            <div className={styles.spinner}>
+                
+            </div>
+            <p>Cargando...</p>
+        </div>)
 }
