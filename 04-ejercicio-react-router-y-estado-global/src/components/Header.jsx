@@ -1,14 +1,16 @@
-import { useCurrentPath } from "../hooks/global/useCurrentPath";
-import { Link } from "./Link";
+import { Link } from "../hooks/router/Link.jsx";
+import imgPerfil from '../assets/img/luffyProfile.webp'
+import { useAuthstore } from "./store/Authstore.js";
+import { BtnGlobal } from "../hooks/global/BtnGlobal.jsx";
+import stl from './Header.module.css'
 
 export function Header() {
-
-  const pathActual = useCurrentPath()
+  const { isLoggedIn, login, logout } = useAuthstore()
 
   return (
-    <header className="header">
+    <header className={stl.header}>
 
-      <div className="logo_header">
+      <div className={stl.logoHeader}>
         <Link href="/">
           <h2>
             <svg
@@ -22,29 +24,25 @@ export function Header() {
               </g>
             </svg>DevJobs</h2>
         </Link>
-        <nav className="nav">
-          <Link href="/" className={pathActual === "/" ? "navActive" : ""}>
-            Inicio
-          </Link>
-
-          <Link href="/search" className={pathActual === "/search" ? "navActive" : ""}>
-            Empleos
-          </Link>
-
-          <Link href="/contact" className={pathActual === "/contact" ? "navActive" : ""}>
-            Contacto
-          </Link>
+        <nav className={stl.navHeader}>
+          <Link href="/">Inicio</Link>
+          <Link href="/search">Empleos</Link>
+          <Link href="/contact">Contacto</Link>
         </nav>
       </div>
 
       <div>
-        <Link className="a_head" href="/subir-cv">Subir CV</Link>
-        <img
-          src="src/assets/img/luffy_profile.jpg"
-          alt="Avatar del usuario"
-          width="50"
-          height="50"
-        />
+        <BtnGlobal to='/login' onClick={isLoggedIn && logout}>
+          {isLoggedIn ? 'Cerrar Sesión' : 'Iniciar Sesión'}
+        </BtnGlobal>
+        {isLoggedIn &&
+          <img
+            src={imgPerfil}
+            alt="Avatar del usuario"
+            width="50"
+            height="50"
+          />}
+
       </div>
     </header>
   )

@@ -27,5 +27,11 @@ export const errors = {
         code: 0,
         message: "Error de conexión",
         description: "No se pudo conectar con el servidor. Compruebe su conexión a internet."
+    },
+
+    notFoundJob: {
+        code: " | El trabajo que buscas no existe",
+        message: "Lo sentimos",
+        description: "El trabajo que buscas no existe"
     }
 }

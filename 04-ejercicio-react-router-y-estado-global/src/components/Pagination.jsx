@@ -1,4 +1,4 @@
-import styles from '../css_module/Pagination.module.css'
+import styles from './Pagination.module.css'
 
 export function Pagination({ currentPage = 1, totalPages = 1, onPageChange }) {
 

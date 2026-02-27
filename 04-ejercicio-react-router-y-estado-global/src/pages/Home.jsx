@@ -1,9 +1,11 @@
-import { useRouter } from '../hooks/router/useRouter'
+import stl from './Home.module.css'
+import { useRouter } from '../hooks/router/useRouter.js'
 import background from '../assets/img/background.webp'
 import { useDocumentTitle } from '../hooks/global/useDocumentTitle'
+import { BtnGlobal } from '../hooks/global/BtnGlobal.jsx'
 
-export function HomePage() {
-    useDocumentTitle('Bienvenido :)') /* Ya lo agregamos en el hook para que no se tenga que repetir en todos los sitios */
+export default function HomePage() {
+    useDocumentTitle('Bienvenido :)')
     const { navigateTo } = useRouter()
 
     const handleSearch = (e) => {
@@ -21,7 +23,7 @@ export function HomePage() {
 
     return (
         <main>
-            <section className="sec1_index">
+            <section className={stl.sec1Index}>
                 <img
                     src={background}
                     width="200"
@@ -35,7 +37,7 @@ export function HomePage() {
                     próxima oportunidad.
                 </p>
 
-                <form onSubmit={handleSearch} className="form_princi form_index w-100" role="search">
+                <form onSubmit={handleSearch} className={stl.formPrinci} role="search">
                     <div>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -59,15 +61,14 @@ export function HomePage() {
                             type="text"
                             placeholder="Buscar empleos por título, habilidad o empresa"
                         />
-
-                        <button className="btn_info" type="submit">
+                        <BtnGlobal type="submit">
                             Buscar
-                        </button>
+                        </BtnGlobal>
                     </div>
                 </form>
             </section>
 
-            <section className="sec2_index">
+            <section className={stl.sec2Index}>
                 <header>
                     <h2>¿Por qué DevJobs?</h2>
                     <p>

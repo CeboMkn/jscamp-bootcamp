@@ -1,0 +1,144 @@
+.secMain {
+    height: auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    margin-top: 2.5rem;
+
+    p {
+        color: var(--color-text-muted);
+    }
+}
+
+.formPrinci {
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+
+    &>div:first-child {
+        display: flex;
+        align-items: center;
+        background-color: var(--color-input-bg);
+        border-radius: 0.5rem;
+        border: 2px solid var(--color-border);
+        box-shadow: 0 10px 15px -3px var(--color-shadow);
+        padding: 0.5rem;
+        transition: border-color 0.2s ease;
+        gap: 0.5rem;
+
+        &:focus-within {
+            border-color: var(--color-primary-hover);
+        }
+
+    }
+
+    input[type="text"] {
+        flex: 1;
+        background: transparent;
+        border: none;
+        outline: none;
+        color: var(--color-text-primary);
+        padding: 5px;
+        font-size: 1rem;
+        font-family: inherit;
+
+        &::placeholder {
+            color: #64748b;
+        }
+    }
+}
+
+.sectionFilter {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+
+    &>div {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        margin-bottom: 1rem;
+        flex-wrap: wrap;
+
+
+        select {
+            padding: 10px 8px;
+            color: #d3d3d3;
+            cursor: pointer;
+            border: none;
+            font-weight: 700;
+            border-radius: 0.5rem;
+            background-color: var(--color-border);
+            transition: backgorund-color 0.2s ease;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            appearance: none;
+            background-position: right 0.5rem center;
+            padding-right: 2.5rem;
+
+            &:hover {
+                background-color: var(--color-primary-hover);
+            }
+
+            &:focus {
+                outline: 2px solid var(--color-primary-hover);
+                outline-offset: 2px;
+            }
+
+
+            option {
+                background-color: var(--color-background);
+                color: var(--color-text-primary);
+            }
+        }
+    }
+
+    div {
+        display: flex;
+        align-items: center;
+    }
+
+}
+
+.btnDellFilters {
+    display: flex;
+    align-items: center;
+    padding: 5px 5px;
+    border-radius: 0.5rem;
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+
+    &:hover,
+    &:focus {
+        background-color: var(--color-primary-hover);
+        outline-offset: 2px;
+    }
+
+    &:active {
+        transform: scale(0.90)
+    }
+
+    &:disabled {
+        opacity: .5;
+        pointer-events: none;
+    }
+
+}
+
+@media (max-width: 850px) {
+    .sectionFilter {
+        flex-direction: column;
+        align-items: center;
+
+        &>div {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0;
+            justify-content: center;
+        }
+    }
+}

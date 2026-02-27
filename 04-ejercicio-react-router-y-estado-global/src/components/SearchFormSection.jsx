@@ -1,4 +1,5 @@
-import { useInfoFilters } from "../hooks/search/useInfoFilters.jsx"
+import stl from './SearchFormSection.module.css'
+import { useInfoFilters } from "../hooks/search/useInfoFilters.js"
 
 export function SearchFormSection({ onFilters, filters }) {
 
@@ -9,11 +10,11 @@ export function SearchFormSection({ onFilters, filters }) {
     )
 
     return (
-        <section className="sec_main">
+        <section className={stl.secMain}>
             <h1>Encuentra tu próximo trabajo</h1>
             <p>Explora miles de oportunidades en el sector tecnológico</p>
 
-            <form className="form_princi w-100" action="" role="search">
+            <form className={stl.formPrinci} action="" role="search">
                 <div>
                     <svg
                         width="24"
@@ -40,7 +41,7 @@ export function SearchFormSection({ onFilters, filters }) {
                     />
                 </div>
 
-                <div className="section_filter">
+                <div className={stl.sectionFilter}>
                     <div>
                         <select name="tecnologia" onChange={handleInfoForm} value={filters.tecnologia || ''}>
                             <option value="" disabled hidden>
@@ -94,7 +95,7 @@ export function SearchFormSection({ onFilters, filters }) {
                     </div>
                     {!filtersEmpty && (
                         <div>
-                            <button type="button" onClick={handleDellFilters} className="btn_del_filters">
+                            <button type="button" onClick={handleDellFilters} className={stl.btnDellFilters}>
                                 <svg
                                     width="15"
                                     height="15"

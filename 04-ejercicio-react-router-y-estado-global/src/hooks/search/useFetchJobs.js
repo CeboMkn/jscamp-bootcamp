@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { DEFAULT_FILTERS } from "../../config.js";
-import { saveFilters } from "./saveFiltersLocalStorage.jsx"
+import { saveFilters } from "./saveFiltersLocalStorage.js"
 import { showToast } from "../global/toast/toast.js";
 
 /* 

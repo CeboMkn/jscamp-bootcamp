@@ -1,26 +1,36 @@
+import { Link } from "../hooks/router/Link"
+import { useAuthstore } from "./store/Authstore"
+import styles from './JobCard.module.css'
+import { BtnFavorite } from "../hooks/global/BtnFavorite"
+import { AplyBytton } from "../hooks/global/AplyButton"
+
 export function JobCard({ job }) {
+
+    const { isLoggedIn } = useAuthstore()
+
     return (
-        <div className="res_busqueda">
+        <div className={styles.resBusqueda}>
             <li>
                 <article>
                     <div>
-                        <a href={job.enlace || "#"}>
+                        <Link href={`/job/${job.id}`}>
                             <h3 className="title_job">{job.titulo}</h3>
-                        </a>
+                        </Link>
 
-                        <small className="first_p">
+                        <small className={styles.firstP}>
                             {job.empresa} | {job.ubicacion}
                         </small>
 
-                        <p className="second_p">{job.descripcion}</p>
+                        <p className={styles.secondP}>{job.descripcion}</p>
                     </div>
-                    <div>
-                        <button className="btn_info btn_active" type="button">
-                            Aplicar
-                        </button>
+                    <div className={isLoggedIn ? styles.btnsJobCard : ''}>
+                        <AplyBytton />
+                        <BtnFavorite jobId={job.id} isLoggedIn={isLoggedIn} />
                     </div>
                 </article>
             </li>
         </div>
     )
 }
+
+
