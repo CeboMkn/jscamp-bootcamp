@@ -26,3 +26,10 @@
         pointer-events: none;
     }
 }
+
+.applied {
+    background-color: rgb(27, 190, 36);
+    &:hover {
+        background-color: rgb(20, 160, 36);
+    }
+}
