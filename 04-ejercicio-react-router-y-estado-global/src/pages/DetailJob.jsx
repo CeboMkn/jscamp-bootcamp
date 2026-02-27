@@ -7,12 +7,14 @@ import { useFetchDetails } from "../hooks/detailJob/useFetchDetails.js"
 import { useParseJob } from "../hooks/detailJob/useParseJob.js"
 import { useAuthstore } from "../components/store/Authstore.js"
 import { BtnFavorite } from "../hooks/global/BtnFavorite.jsx"
-import { BtnGlobal } from "../hooks/global/BtnGlobal.jsx"
+import { useAppliedStore } from "../components/store/AppliedStore.js"
+import { AplyButton } from "../hooks/global/AplyButton"
 
 
 export default function DetailJob() {
 
     const { isLoggedIn } = useAuthstore()
+    const { toggleApplied, isApplied } = useAppliedStore()
 
     const { jobId } = useParams()
 
@@ -40,9 +42,9 @@ export default function DetailJob() {
                         <p>{job.empresa} • {job.ubicacion}</p>
                     </section>
                     <div className={stl.btnsDetalles}>
-                        <BtnGlobal disabled={!isLoggedIn}>
+                        <AplyButton jobId={job.id} disabled={!isLoggedIn}>
                             {isLoggedIn ? 'Aplicar ahora' : 'Iniciar Sesión para aplicar'}
-                        </BtnGlobal>
+                        </AplyButton>
                         <BtnFavorite jobId={job.id} />
                     </div>
                 </div>
@@ -120,9 +122,9 @@ export default function DetailJob() {
                 </div>
 
                 <footer className={stl.btnFooter}>
-                    <button disabled={!isLoggedIn} type="button" className="btn_info">
+                    <AplyButton jobId={job.id} disabled={!isLoggedIn}>
                         {isLoggedIn ? 'Aplicar ahora' : 'Iniciar Sesión para aplicar'}
-                    </button>
+                    </AplyButton>
                 </footer>
             </main>
         </>

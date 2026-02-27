@@ -71,7 +71,7 @@ h1+p {
     align-items: center;
 
     &>div {
-        max-width: 1200px;
+        max-width: 1250px;
         padding: 0 5rem;
         width: 100%;
     }

@@ -1,5 +1,5 @@
 .btnInfo {
-    padding: 0.75rem 1.5rem;
+    padding: 0.6rem 1.5rem;
     border-radius: 0.5rem;
     background-color: var(--color-primary);
     color: white;
@@ -28,8 +28,8 @@
 }
 
 .applied {
-    background-color: rgb(27, 190, 36);
+    background-color: #4caf50;
     &:hover {
-        background-color: rgb(20, 160, 36);
+        background-color: #39853b;
     }
 }

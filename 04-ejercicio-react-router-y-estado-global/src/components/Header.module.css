@@ -65,8 +65,7 @@
             color: var(--color-primary-light);
         }
 
-        &:hover,
-        &:focus {
+        &:hover {
             color: var(--color-primary-light);
             outline: none;
         }
