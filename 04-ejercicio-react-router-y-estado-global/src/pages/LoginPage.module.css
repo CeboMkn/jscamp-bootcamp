@@ -10,11 +10,14 @@
     display: flex;
     flex-direction: column;
     border: 1px solid var(--color-border);
-    padding: 3rem 4rem;
+    padding: 2rem 2rem;
     margin: 2rem;
     border-radius: 1rem;
     box-shadow: 9px 9px 15px -3px var(--color-shadow);
     list-style: none;
+    background-color: #091d31;
+    width: 450px;
+    height: auto;
 }
 
 .formLogin {
@@ -30,7 +33,7 @@
     width: 100%;
     display: flex;
     align-items: center;
-    background-color: var(--color-input-bg);
+    background-color: var(--color-background);
     border-radius: 0.5rem;
     border: 2px solid var(--color-border);
     box-shadow: 0 10px 15px -3px var(--color-shadow);
@@ -52,6 +55,101 @@
         padding: 5px;
         font-size: 1rem;
         font-family: inherit;
+        font-weight: 600;
 
+    }
+}
+
+.btnLogin {
+    width: 100%;
+
+    &>button {
+        width: 100%;
+        background-color: var(--color-primary);
+        color: white;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.5rem;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+
+
+        &:hover {
+            background-color: var(--color-primary-hover);
+        }
+    }
+
+}
+
+.separador {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #8a929a;
+    font-family: sans-serif;
+    width: 100%;
+}
+
+.separador::before,
+.separador::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #333b45;
+}
+
+.separador::before {
+    margin-right: 15px;
+}
+
+.separador::after {
+    margin-left: 15px;
+}
+
+.containerIniciar {
+    display: flex;
+    gap: 1rem;
+    background-color: var(--color-background);
+}
+
+.insideContainerIniciar {
+    border: 1px solid var(--color-border);
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    display: flex;
+    width: 50%;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+.containerRecordar {
+    display: flex;
+    width: 100%;
+    font-size: 0.9rem;
+    justify-content: space-between;
+}
+
+.recordar {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+
+    &>input {
+        accent-color: var(--color-border);
+        width: auto;
+    }
+}
+
+.olvidar {
+    &>a {
+        color: var(--color-primary);
+        text-decoration: none;
+        transition: color 0.2s ease;
+
+        &:hover {
+            color: var(--color-primary-hover);
+        }
     }
 }

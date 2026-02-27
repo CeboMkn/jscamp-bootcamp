@@ -14,7 +14,6 @@ import { AplyButton } from "../hooks/global/AplyButton"
 export default function DetailJob() {
 
     const { isLoggedIn } = useAuthstore()
-    const { toggleApplied, isApplied } = useAppliedStore()
 
     const { jobId } = useParams()
 
