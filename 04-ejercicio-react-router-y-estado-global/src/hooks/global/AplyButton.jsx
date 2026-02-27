@@ -11,10 +11,12 @@ export function AplyButton({ jobId }) {
         toggleApplied(jobId)
     }
 
-    const label = isLoggedIn ? (isApplied(jobId) ? 'Aplicado' : 'Aplicar') : 'Inicia Sesión'
+    const applied = isApplied(jobId)
+    const label = isLoggedIn ? (applied ? "Aplicado" : "Aplicar") : "Inicia Sesión"
+    const className = isLoggedIn && applied ? stl.applied : ""
 
     return (
-        <BtnGlobal className={isApplied(jobId) ? stl.applied : ""} onClick={handleApply} disabled={!isLoggedIn}>
+        <BtnGlobal className={className} onClick={handleApply} disabled={!isLoggedIn}>
             {label}
         </BtnGlobal>
     )

@@ -13,7 +13,7 @@ export function JobCard({ job }) {
             <li>
                 <article>
                     <div>
-                        <Link href={`/job/${job.id}`}>
+                        <Link href={`/job/${job.id}`} target="_blank" rel="noreferrer">
                             <h3 className="title_job">{job.titulo}</h3>
                         </Link>
 

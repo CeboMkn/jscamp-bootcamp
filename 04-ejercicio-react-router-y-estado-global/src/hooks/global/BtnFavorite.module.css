@@ -5,12 +5,13 @@
     border-radius: 0.5rem;
     background-color: var(--color-primary);
     border: none;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: outline-color 0.2s ease, transform 0.1s ease;
 
     &:hover {
-        background-color: var(--color-primary-hover);
-        outline-offset: 2px;
+        outline-color: var(--color-primary-hover);
     }
 
     &:active {
