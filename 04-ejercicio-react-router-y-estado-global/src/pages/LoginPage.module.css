@@ -1,3 +1,21 @@
+.containerTitle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 0.5rem;
+
+    >h1 {
+        color: var(--color-text-primary);
+    }
+
+    >p {
+        color: var(--color-text-muted);
+        margin-bottom: 0;
+    }
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -134,22 +152,62 @@
 .recordar {
     display: flex;
     align-items: center;
-    gap: 0.25rem;
+    gap: 0.5rem;
+    color: #8a929a;
 
-    &>input {
-        accent-color: var(--color-border);
-        width: auto;
+    >input {
+        display: none;
+    }
+
+    >label {
+        position: relative;
+        padding-left: 26px;
+        cursor: pointer;
+        user-select: none;
+
+        &::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 2px;
+
+            width: 14px;
+            height: 14px;
+
+            border: 2px solid var(--color-border);
+            border-radius: 4px;
+
+            transition: all 0.2s ease;
+        }
+    }
+
+    >input:checked+label::before {
+        background: var(--color-border);
+        border-color: var(--color-border);
+    }
+
+    >input:checked+label::after {
+        content: "";
+        position: absolute;
+        left: 5px;
+        top: 3px;
+
+        width: 6px;
+        height: 10px;
+
+        border: solid white;
+        border-width: 0 2px 2px 0;
+
+        transform: rotate(45deg);
     }
 }
 
-.olvidar {
-    &>a {
-        color: var(--color-primary);
-        text-decoration: none;
-        transition: color 0.2s ease;
+.link {
+    color: #8a929a;
+    text-decoration: none;
+    transition: color 0.2s ease;
 
-        &:hover {
-            color: var(--color-primary-hover);
-        }
+    &:hover {
+        color: var(--color-primary-hover);
     }
 }
