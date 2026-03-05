@@ -44,4 +44,6 @@ Por lo demas he realizado el ejercicio de rutas con lazy, usar Navlink en el hea
 Tambien al iniciar sesión he implementado la página de Login lo más parecido a como viene en stitch, tambien está la página de registro pero esta tiene unos estilos
 básicos. 
 
+Tambien he intentado contactar con vosotros por correo pero me salen devueltos, tengo alguna duda con el repo, no se ha actualizado el readme que lleva el check de los ejercicios que llevo realizados, esque creo que e visto a otros alumnos que sí que lo tienen actualizado, y tenia otra duda, cada vez qeu se completa un ejercicio hay que hacer un pr a main para ir montando la aplicación final a main? 
+
 Muchas gracias.
