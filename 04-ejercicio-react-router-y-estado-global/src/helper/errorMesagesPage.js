@@ -30,8 +30,8 @@ export const errors = {
     },
 
     notFoundJob: {
-        code: " | El trabajo que buscas no existe",
+        code: " | En estos momentos no podemos mostrar los detalles de este empleo.",
         message: "Lo sentimos",
-        description: "El trabajo que buscas no existe"
+        description: "En estos momentos no podemos mostrar los detalles de este empleo."
     }
 }

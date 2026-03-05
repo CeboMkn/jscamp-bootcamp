@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { showToast } from '../global/toast/toast'
 
 export function useFetchDetails(jobId) {
   const [job, setJob] = useState(null)
@@ -8,17 +9,31 @@ export function useFetchDetails(jobId) {
   useEffect(() => {
     if (!jobId) return
 
-    setLoading(true)
-    setError(null)
+    async function fetchJobDetails() {
+      try {
+        setLoading(true)
+        setError(null)
 
-    fetch(`https://jscamp-api.vercel.app/api/jobs/${jobId}`)
-      .then(res => {
-        if (!res.ok) throw new Error('Job not found')
-        return res.json()
-      })
-      .then(setJob)
-      .catch(err => setError(err.message))
-      .finally(() => setLoading(false))
+        const res = await fetch(`https://jscamp-api.vercel.app/api/jobs/${jobId}`)
+
+        if (!res.ok) {
+          throw new Error('Error al obtener los detalles del empleo')
+        }
+
+        const data = await res.json()
+        setJob(data)
+
+      } catch (err) {
+
+        setError(err.message)
+        showToast('Error al obtener los detalles del empleo', 'error')
+
+      } finally {
+        
+        setLoading(false)
+      }
+    }
+    fetchJobDetails()
   }, [jobId])
 
   return { job, loading, error }
