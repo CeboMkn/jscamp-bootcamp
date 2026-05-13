@@ -35,6 +35,7 @@ export function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/profile" element={
+              /* Excelente! */
               <ProtectedRoute>
                 <ProfilePage />
               </ProtectedRoute>
