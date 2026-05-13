@@ -1,11 +1,20 @@
 import { useState } from 'react';
 import { useFetchJobs } from './useFetchJobs';
 import { DEFAULT_FILTERS } from '../../config';
+import { useSearchParams } from 'react-router';
+
+const resultsPerPage = DEFAULT_FILTERS.RESULTS_PER_PAGE
 
 export const useFilters = () => {
-    const resultsPerPage = DEFAULT_FILTERS.RESULTS_PER_PAGE
     const [currentPage, setCurrentPage] = useState(1)
-    const [filters, setToFilters] = useState(getInitialFilters()) // Podemos extraer la lógica de la inicialización de los filtros en una función para que no se vea tan cargado el hook y que sea más fácil de leer
+    const [searchParams] = useSearchParams()
+    // Ahora que usamos react-router, los filtros vienen directamente de la URL
+    const [filters, setToFilters] = useState(() => ({
+        search: searchParams.get('text') || '',
+        tecnologia: searchParams.get('technology') || '',
+        ubicacion: searchParams.get('type') || '',
+        nivel: searchParams.get('level') || ''
+    }))
 
     const { jobs, loading, total } = useFetchJobs(currentPage, filters, resultsPerPage)
 
@@ -35,8 +44,9 @@ export const useFilters = () => {
     }
 }
 
-const getInitialFilters = () => {
+/* const getInitialFilters = () => {
     const readUrl = new URLSearchParams(window.location.search)
+    console.log({ readUrl })
     if (readUrl.size > 2) {
         return {
             search: readUrl.get('text') || '',
@@ -63,4 +73,4 @@ const getInitialFilters = () => {
         ubicacion: params.get('type') || '',
         nivel: params.get('level') || ''
     }
-}
+} */
