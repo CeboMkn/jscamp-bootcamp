@@ -1,3 +1,3 @@
 export const DEFAULT_FILTERS = {
-    RESULTS_PER_PAGE: 4
+    RESULTS_PER_PAGE: 3
 }

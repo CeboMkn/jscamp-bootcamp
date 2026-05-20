@@ -157,3 +157,16 @@ El formato sería así:
 - tu rama **main** tendría las PRs de las ramas **correccion-***.
 
 Los checks del readme no te preocupes, lo hemos hecho a mano y la verdad, me he olvidado de actualizarlo en unos cuantos repos, lo iré haciendo poco a poco.
+
+
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+Que way, esque me daba problemas al instalar snarkdown no se porque, pero ya esta implementado gracias a ti y he creado un componente para DetailJobsection con sus estilos y he conseguido añadir el svg, ha quedado genial
+
+Tambien he implementado el uso de searchParams en useFilters y useFetchJobs, tambien tenia mis dudas pero lo he conseguido y entendido y es muchisimo mejor
+Tambien he quitado de la url el limit y el ofset
+A la hora de pulsar en el header en empleos se quitaban los params de la url pero no los filtros y no se movia, entocnes quedaba una url vacia con filtros aplicados, tambien lo he solucionado con un useEffect en useFilters, antes al pulsarlo hacia como que navegaba a search, pero claro como ya estaba en search no renderizaba nada mas, he añadido el useEffect para que cuando cambien los params, los detecte y aplique los filtros que ponga en la url, y claro como al pulsarlo ahora sin navegar cambia los params aplica los filtros y renderiza de nuevo, no se si me explico, me ha costado un poco entenderlo a mi tambien pero creo que esta bien.
+
+He conseguido lo de la paginacion, pero he de decir que la ejecucion me la ha dado gemini, he creado un hook que es paginacionVisible.js con la lógica para que siempre muestre tres paginas en el medio y siempre la pagina activa esté en medio para que puedas pulsar la de los lados y a quedado genialn me siento mal por haber utilizado ia para generar la logica, solo la utilizo para detalles que no entiendo, y le digo que me lo explique a la perfeccion para entenderlo y aprender.
+
+Creo que todo lo demás esta hecho, muchisimas gracias :)

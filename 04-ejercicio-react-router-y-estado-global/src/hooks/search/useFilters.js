@@ -1,22 +1,15 @@
-import { useState } from 'react';
+import { useSearchParams } from 'react-router'
+import { useState, useEffect } from 'react';
 import { useFetchJobs } from './useFetchJobs';
 import { DEFAULT_FILTERS } from '../../config';
-import { useSearchParams } from 'react-router';
-
-const resultsPerPage = DEFAULT_FILTERS.RESULTS_PER_PAGE
 
 export const useFilters = () => {
+    const resultsPerPage = DEFAULT_FILTERS.RESULTS_PER_PAGE
     const [currentPage, setCurrentPage] = useState(1)
     const [searchParams] = useSearchParams()
-    // Ahora que usamos react-router, los filtros vienen directamente de la URL
-    const [filters, setToFilters] = useState(() => ({
-        search: searchParams.get('text') || '',
-        tecnologia: searchParams.get('technology') || '',
-        ubicacion: searchParams.get('type') || '',
-        nivel: searchParams.get('level') || ''
-    }))
+    const [filters, setToFilters] = useState(getInitialFilters(searchParams))
 
-    const { jobs, loading, total } = useFetchJobs(currentPage, filters, resultsPerPage)
+    const { jobs, loading, total } = useFetchJobs(currentPage, filters)
 
     const totalPages = Math.ceil(total / resultsPerPage)
 
@@ -31,6 +24,24 @@ export const useFilters = () => {
         setCurrentPage(page)
     }
 
+    useEffect(() => {
+        const urlFilters = {
+            search: searchParams.get('text') || '',
+            tecnologia: searchParams.get('technology') || '',
+            ubicacion: searchParams.get('type') || '',
+            nivel: searchParams.get('level') || ''
+        }
+
+        setToFilters(prev => {
+            const noChange =
+                prev.search === urlFilters.search &&
+                prev.tecnologia === urlFilters.tecnologia &&
+                prev.ubicacion === urlFilters.ubicacion &&
+                prev.nivel === urlFilters.nivel
+            return noChange ? prev : urlFilters
+        })
+    }, [searchParams])
+
     return {
         loading,
         filters,
@@ -44,33 +55,13 @@ export const useFilters = () => {
     }
 }
 
-/* const getInitialFilters = () => {
-    const readUrl = new URLSearchParams(window.location.search)
-    console.log({ readUrl })
-    if (readUrl.size > 2) {
-        return {
-            search: readUrl.get('text') || '',
-            tecnologia: readUrl.get('technology') || '',
-            ubicacion: readUrl.get('type') || '',
-            nivel: readUrl.get('level') || ''
-        }
-    }
+const getInitialFilters = (searchParams) => {
 
-    const saved = localStorage.getItem('jobsFilters')
-    if (!saved) {
-        return {
-            search: '',
-            tecnologia: '',
-            ubicacion: '',
-            nivel: ''
-        }
-    }
-
-    const params = new URLSearchParams(saved)
     return {
-        search: params.get('text') || '',
-        tecnologia: params.get('technology') || '',
-        ubicacion: params.get('type') || '',
-        nivel: params.get('level') || ''
+        search: searchParams.get('text') || '',
+        tecnologia: searchParams.get('technology') || '',
+        ubicacion: searchParams.get('type') || '',
+        nivel: searchParams.get('level') || ''
     }
-} */
+
+}

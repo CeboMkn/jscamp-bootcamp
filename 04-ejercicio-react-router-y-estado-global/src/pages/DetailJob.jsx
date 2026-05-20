@@ -4,12 +4,12 @@ import { Link } from "../hooks/router/Link"
 import { Spinner } from "../components/Spinner"
 import ErrorPage from "./ErrorPage.jsx"
 import { useFetchDetails } from "../hooks/detailJob/useFetchDetails.js"
-// import { useParseJob } from "../hooks/detailJob/useParseJob.js"
 import { useAuthstore } from "../components/store/Authstore.js"
 import { BtnFavorite } from "../hooks/global/BtnFavorite.jsx"
 import { AplyButton } from "../hooks/global/AplyButton"
+import { DetailJobSection } from "../components/DetailJobSection.jsx"
 
-import snarkdown from "snarkdown";
+import { useDocumentTitle } from "../hooks/global/useDocumentTitle.js"
 
 
 export default function DetailJob() {
@@ -19,12 +19,11 @@ export default function DetailJob() {
     const { jobId } = useParams()
 
     const { job, loading, error } = useFetchDetails(jobId)
-    // Ya no hace falta usar `useParseJob`
-    /* const { responsibilities, requirements } = useParseJob(job) */
 
     if (loading) return <Spinner position />
     if (error) return <ErrorPage codeError="notFoundJob" />
 
+    useDocumentTitle(job.titulo)
 
     return (
         <>
@@ -79,17 +78,4 @@ export default function DetailJob() {
     )
 }
 
-function DetailJobSection({ title, content }) {
-  const htmlContent = snarkdown(content);
 
-  return (
-    /* Luego aquí podes poner estilos a nivel de `section` para estilar lo que quieras dentro del HTML devuelto por jobs */
-    <section>
-      <h2>{title}</h2>
-      <div
-        className={`prose`}
-        dangerouslySetInnerHTML={{ __html: htmlContent }}
-      />
-    </section>
-  );
-}

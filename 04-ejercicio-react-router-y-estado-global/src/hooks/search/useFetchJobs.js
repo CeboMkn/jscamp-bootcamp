@@ -1,3 +1,4 @@
+import { useSearchParams } from "react-router";
 import { useEffect, useState } from "react";
 import { DEFAULT_FILTERS } from "../../config.js";
 import { saveFilters } from "./saveFiltersLocalStorage.js"
@@ -15,6 +16,7 @@ export function useFetchJobs(currentPage, filters) {
     const [jobs, setJobs] = useState([])
     const [total, setTotal] = useState(0)
     const [loading, setLoading] = useState(false)
+    const [, setSearchParams] = useSearchParams()
 
     useEffect(() => {
         async function fetchJobs() {
@@ -23,19 +25,20 @@ export function useFetchJobs(currentPage, filters) {
                 setLoading(true)
 
                 /* await sleep(500) */
-                const params = new URLSearchParams()
-                if (filters.search) params.append('text', filters.search)
-                if (filters.tecnologia) params.append('technology', filters.tecnologia)
-                if (filters.ubicacion) params.append('type', filters.ubicacion)
-                if (filters.nivel) params.append('level', filters.nivel)
+                const urlParams = new URLSearchParams()
+                if (filters.search) urlParams.append('text', filters.search)
+                if (filters.tecnologia) urlParams.append('technology', filters.tecnologia)
+                if (filters.ubicacion) urlParams.append('type', filters.ubicacion)
+                if (filters.nivel) urlParams.append('level', filters.nivel)
 
+                const apiParams = new URLSearchParams(urlParams)
+                apiParams.append('limit', resultPerPage)
                 const offset = (currentPage - 1) * resultPerPage
-                params.append('limit', resultPerPage)
-                params.append('offset', offset)
+                apiParams.append('offset', offset)
 
-                const queryParams = params.toString()
+                const queryParams = apiParams.toString()
                 const name = 'jobsFilters'
-                window.history.pushState({}, '', `${window.location.pathname}?${queryParams}`)
+                setSearchParams(urlParams, { replace: true })
                 saveFilters(name, queryParams)
 
                 const response = await fetch(`https://jscamp-api.vercel.app/api/jobs?${queryParams}`)
