@@ -170,3 +170,11 @@ A la hora de pulsar en el header en empleos se quitaban los params de la url per
 He conseguido lo de la paginacion, pero he de decir que la ejecucion me la ha dado gemini, he creado un hook que es paginacionVisible.js con la lógica para que siempre muestre tres paginas en el medio y siempre la pagina activa esté en medio para que puedas pulsar la de los lados y a quedado genialn me siento mal por haber utilizado ia para generar la logica, solo la utilizo para detalles que no entiendo, y le digo que me lo explique a la perfeccion para entenderlo y aprender.
 
 Creo que todo lo demás esta hecho, muchisimas gracias :)
+
+**Respuesta:**
+Hola genio! Se entendió perfecto! Me alegro que haya funcionado `snarkdown`, no recuerdo que error hubo al instalarlo, pero muchas veces eliminando `node_modules` y `package-lock.json` y volviendo a instalar resuelve los problemas. No recuerdo si este fue ese el caso, pero te lo digo para futuros errores jeje
+
+Por otro lado, excelente lo que aplicaste! Quedó un sitio muy funcional y con buena UI, quedé feliz :)
+La paginación quedó increíble! La probe recién y funciona 10/10. No te preocupes por usar IA para estas cosas, es una herramienta más y hay que usarla. Lo importante siempre es entender lo que hace y lo has hecho.
+
+A seguir así que vas espectacular!
