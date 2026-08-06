@@ -31,29 +31,23 @@ const server = createServer(async (req, res) => {
     }
 
     if (path === '/users') {
-      const name = searchParams.get('name');
+      const name = searchParams.get('name')?.toLowerCase();
       const limit = Number(searchParams.get('limit')) || users.length;
       const offset = Number(searchParams.get('offset')) || 0;
-      const minAge = searchParams.get('minAge');
-      const maxAge = searchParams.get('maxAge');
 
-      let filteredUsers = users;
+      const minAgeRaw = searchParams.get('minAge');
+      const maxAgeRaw = searchParams.get('maxAge');
+      const minAge = minAgeRaw ? Number(minAgeRaw) : null;
+      const maxAge = maxAgeRaw ? Number(maxAgeRaw) : null;
 
-      if (name) {
-        filteredUsers = filteredUsers.filter(user =>
-          user.name.toLowerCase().includes(name.toLowerCase())
-        );
-      }
-
-      if (minAge !== null && minAge !== '') {
-        filteredUsers = filteredUsers.filter(user => user.age >= parseInt(minAge, 10));
-      }
-
-      if (maxAge !== null && maxAge !== '') {
-        filteredUsers = filteredUsers.filter(user => user.age <= parseInt(maxAge, 10));
-      }
-
-      const paginatedUsers = filteredUsers.slice(offset, offset + limit);
+      const paginatedUsers = users
+        .filter(user => {
+          if (name && !user.name.toLowerCase().includes(name)) return false;
+          if (minAge !== null && user.age < minAge) return false;
+          if (maxAge !== null && user.age > maxAge) return false;
+          return true;
+        })
+        .slice(offset, offset + limit);
 
       sendJson(res, 200, paginatedUsers);
       return;
@@ -71,7 +65,7 @@ const server = createServer(async (req, res) => {
       const newUser = {
         id: randomUUID(),
         name: body.name,
-        age: body.age || null,
+        age: body.age,
       };
       users.push(newUser);
 
