@@ -1,11 +1,81 @@
 import { createServer } from 'node:http'
+import { uptime } from 'node:process';
+import { randomUUID } from 'node:crypto';
+import { json } from 'node:stream/consumers';
 
 process.loadEnvFile()
 
 const port = process.env.PORT || 3000
 
-const server = createServer((req, res) => {
-  // TODO: Aquí irá la lógica del servidor
+function sendJson(res, statusCode, data) {
+  res.statusCode = statusCode;
+  res.setHeader('Content-Type', 'application/json; charset=utf-8');
+  res.end(JSON.stringify(data));
+}
+
+const server = createServer(async (req, res) => {
+
+  const { url, method } = req;
+  const [path, query] = url.split('?');
+  const searchParams = new URLSearchParams(query);
+
+  if (method === 'GET') {
+    if (path === '/') {
+      sendJson(res, 200, { message: 'Servidor operativo' });
+      return
+    }
+
+    if (path === '/health') {
+      sendJson(res, 200, { status: 'ok', uptime: uptime() });
+      return
+    }
+
+    if (path === '/users') {
+      const name = searchParams.get('name')?.toLowerCase();
+      const limit = Number(searchParams.get('limit')) || users.length;
+      const offset = Number(searchParams.get('offset')) || 0;
+
+      const minAgeRaw = searchParams.get('minAge');
+      const maxAgeRaw = searchParams.get('maxAge');
+      const minAge = minAgeRaw ? Number(minAgeRaw) : null;
+      const maxAge = maxAgeRaw ? Number(maxAgeRaw) : null;
+
+      const paginatedUsers = users
+        .filter(user => {
+          if (name && !user.name.toLowerCase().includes(name)) return false;
+          if (minAge !== null && user.age < minAge) return false;
+          if (maxAge !== null && user.age > maxAge) return false;
+          return true;
+        })
+        .slice(offset, offset + limit);
+
+      sendJson(res, 200, paginatedUsers);
+      return;
+    }
+
+  }
+
+  if (method === 'POST') {
+    if (path === '/users') {
+      const body = await json(req);
+      if (!body || !body.name || !body.age) {
+        return sendJson(res, 400, { error: 'Los campos "name" y "age" son obligatorios' });
+      }
+
+      const newUser = {
+        id: randomUUID(),
+        name: body.name,
+        age: body.age,
+      };
+      users.push(newUser);
+
+      sendJson(res, 201, { message: 'Usuario creado correctamente', user: newUser });
+
+    }
+  }
+
+  return sendJson(res, 404, { error: 'Ruta no encontrada' });
+
 })
 
 server.listen(port, () => {
