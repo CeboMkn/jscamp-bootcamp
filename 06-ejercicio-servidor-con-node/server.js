@@ -1,6 +1,6 @@
-import { createServer } from 'node:http'
-import { uptime } from 'node:process';
 import { randomUUID } from 'node:crypto';
+import { createServer } from 'node:http';
+import { uptime } from 'node:process';
 import { json } from 'node:stream/consumers';
 
 process.loadEnvFile()
@@ -32,13 +32,32 @@ const server = createServer(async (req, res) => {
 
     if (path === '/users') {
       const name = searchParams.get('name')?.toLowerCase();
+
+      // Excelente! Vamos a aplicar algunas validaciones para los parámetros numéricos
+
+      // Number.isIntegrer ya evalúa que el valor no sea NaN, Infinity o decimal.
+      const isValid = (num) => Number.isInteger(num) && num >= 0
+      
       const limit = Number(searchParams.get('limit')) || users.length;
       const offset = Number(searchParams.get('offset')) || 0;
+      
+      // Validamos limit t offser
+      if(!isValid(limit) || !isValid(offset)) {
+        return sendJson(res, 400, { error: 'Los parámetros "limit" y "offset" deben ser números enteros mayores o iguales a 0' });
+      }
 
       const minAgeRaw = searchParams.get('minAge');
       const maxAgeRaw = searchParams.get('maxAge');
       const minAge = minAgeRaw ? Number(minAgeRaw) : null;
       const maxAge = maxAgeRaw ? Number(maxAgeRaw) : null;
+
+      // Validamos minAge y maxAge con una variación. Solo vamos a pasar por el validador si minAge o maxAge existen como parámetro.
+      if(minAge !== null && !isValid(minAge)) {
+        return sendJson(res, 400, { error: 'El parámetro "minAge" debe ser un número entero mayor o igual a 0' });
+      }
+      if(maxAge !== null && !isValid(maxAge)) {
+        return sendJson(res, 400, { error: 'El parámetro "maxAge" debe ser un número entero mayor o igual a 0' });
+      }
 
       const paginatedUsers = users
         .filter(user => {
