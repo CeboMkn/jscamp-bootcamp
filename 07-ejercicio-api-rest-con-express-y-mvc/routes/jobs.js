@@ -15,4 +15,23 @@ Deberás implementar:
 - Eliminar un job por id [DELETE]
 */
 
+/* GET ***************************************************************************************************/
+
 jobsRouter.get('/', jobsController.getAllJobs);
+jobsRouter.get('/:id', jobsController.getJobById);
+
+/* POST **************************************************************************************************/
+
+jobsRouter.post('/', jobsController.createJob);
+
+/* PUT ***************************************************************************************************/
+
+jobsRouter.put('/:id', jobsController.updateJob);
+
+/* PATCH *************************************************************************************************/
+
+jobsRouter.patch('/:id', jobsController.patchJob);
+
+/* DELETE *************************************************************************************************/
+
+jobsRouter.delete('/:id', jobsController.deleteJob);

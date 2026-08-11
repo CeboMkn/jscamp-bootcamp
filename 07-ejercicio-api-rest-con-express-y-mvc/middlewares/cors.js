@@ -1,7 +1,11 @@
 import cors from 'cors';
 
 const ACEPTED_ORIGINS = [
-    '*'
+    `http://localhost:3000`,
+    `http://localhost:1234`,
+    `https://midu.dev`,
+    `http://jscamp.dev`,
+    `http://localhost:5173`
 ];
 
 export const corsMiddleware = ({ accept = ACEPTED_ORIGINS } = {}) => {
