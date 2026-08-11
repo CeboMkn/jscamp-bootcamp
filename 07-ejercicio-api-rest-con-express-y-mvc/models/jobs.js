@@ -4,10 +4,8 @@ import fs from 'fs'
 /* Aquí deberá ir la lógica de tu modelo */
 /* Recuerda que el modelo SOLO debe manejar la lógica de los datos, en este caso nuestro JSON */
 
-/* const jobs = JSON.parse(fs.readFileSync(new URL('../jobs.json', import.meta.url), 'utf-8')) */
-
 export class JobsModel {
-    static async getAll({ offset = 0, limit = 10, text, technology, type, level }) {
+    static async getAll({ offset, limit, text, technology, type, level }) {
         const limitNumber = Number(limit)
         const offsetNumber = Number(offset)
 
@@ -15,7 +13,7 @@ export class JobsModel {
             .filter(job => {
                 if (text) {
                     const lowerText = text.toLowerCase()
-                    if (!job.titulo.toLowerCase().includes(lowerText) && !job.descripcion.toLowerCase().includes(lowerText)) {
+                    if (!job.titulo.toLowerCase().includes(lowerText) && !job.content.description.toLowerCase().includes(lowerText)) {
                         return false
                     }
                 }
