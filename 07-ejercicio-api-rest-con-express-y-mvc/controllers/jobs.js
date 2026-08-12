@@ -1,7 +1,8 @@
 /* Aquí debe ir la lógica de tu controlador */
-import { JobsModel } from "../models/jobs.js";
 import { DEFAULTS } from "../config.js";
+import { JobsModel } from "../models/jobs.js";
 
+// Excelente. Solo un detalle, por convención, en JavaScript usamos camelCase para las variables, no es grave, solo te lo comento por si acostumbras luego a usarlo así. Seguramente en un equipo de desarrollo tengas que re acostumbrarte :)
 const default_limit = DEFAULTS.LIMIT_PAGINATION;
 const default_offset = DEFAULTS.LIMIT_OFFSET;
 
