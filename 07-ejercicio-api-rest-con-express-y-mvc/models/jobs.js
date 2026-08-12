@@ -1,6 +1,5 @@
-import jobs from '../jobs.json' with { type: 'json' }
-import fs from 'fs'
 import cripto from 'crypto'
+import jobs from '../jobs.json' with { type: 'json' }
 
 /* Aquí deberá ir la lógica de tu modelo */
 /* Recuerda que el modelo SOLO debe manejar la lógica de los datos, en este caso nuestro JSON */
@@ -91,7 +90,7 @@ export class JobsModel {
         const updatedJob = {
             ...jobs[jobIndex],
             ...input,
-            id: jobs[jobIndex].id
+            id: jobs[jobIndex].id // <- Excelente! Siempre que necesites persistir algo de un objeto y modificar el resto, hacer esto es el mejor camino
         };
 
         jobs[jobIndex] = updatedJob;
