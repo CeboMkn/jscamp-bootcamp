@@ -1,44 +1,37 @@
 import { Router } from 'express'
-import { JobController } from '../controllers/jobs.js'
-import { validateJob, validatePartialJob } from '../schemas/jobs.js'
+import { jobsController } from "../controllers/jobs.js";
 
 export const jobsRouter = Router()
 
-function validateCreate(req, res, next) {
-  const result = validateJob(req.body)
+/* Aquí debe ir la lógica de tus rutas */
+/* Recuerda que en tus rutas debes usar los controladores */
+/* 
+Deberás implementar:
+- Obtener todos los jobs [GET]
+- Obtener un job por id [GET]
+- Crear un job [POST]
+- Actualizar un job por id [PUT]
+- Actualizar parcialmente un job por id [PATCH]
+- Eliminar un job por id [DELETE]
+*/
 
-  if (!result.success) {
-    return res.status(400).json({
-      error: 'Invalid Request',
-      details: result.error.issues,
-    })
-  }
+/* GET ***************************************************************************************************/
 
-  req.body = result.data
-  next()
-}
+jobsRouter.get('/', jobsController.getAllJobs);
+jobsRouter.get('/:id', jobsController.getJobById);
 
-function validatePartialUpdate(req, res, next) {
-  const result = validatePartialJob(req.body)
+/* POST **************************************************************************************************/
 
-  if (!result.success) {
-    return res.status(400).json({
-      error: 'Invalid Request',
-      details: result.error.issues,
-    })
-  }
+jobsRouter.post('/', jobsController.createJob);
 
-  req.body = result.data
-  next()
-}
+/* PUT ***************************************************************************************************/
 
-jobsRouter.get('/', JobController.getAll)
-jobsRouter.get('/:id', JobController.getId)
+jobsRouter.put('/:id', jobsController.updateJob);
 
-jobsRouter.post('/', validateCreate, JobController.create)
+/* PATCH *************************************************************************************************/
 
-jobsRouter.put('/:id', JobController.update)
+jobsRouter.patch('/:id', jobsController.patchJob);
 
-jobsRouter.patch('/:id', validatePartialUpdate, JobController.partialUpdate)
+/* DELETE *************************************************************************************************/
 
-jobsRouter.delete('/:id', JobController.delete)
+jobsRouter.delete('/:id', jobsController.deleteJob);

@@ -1,10 +1,12 @@
 import express from 'express'
 import { jobsRouter } from './routes/jobs.js'
 import { DEFAULTS } from './config.js'
+import { corsMiddleware } from './middlewares/cors.js'
 
 const PORT = DEFAULTS.PORT || 3000
 const app = express()
 
+app.use(corsMiddleware())
 app.use(express.json());
 
 app.get('/', (req, res) => {
