@@ -3,7 +3,11 @@ import { jobsRouter } from './routes/jobs.js'
 import { DEFAULTS } from './config.js'
 import { corsMiddleware } from './middlewares/cors.js'
 
-const PORT = DEFAULTS.PORT || process.env.PORT
+let PORT = DEFAULTS.PORT
+
+try {
+  PORT = process.env.PORT ?? DEFAULTS.PORT
+} catch {}
 const app = express()
 
 app.use(corsMiddleware())
