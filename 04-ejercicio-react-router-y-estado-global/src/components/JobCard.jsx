@@ -1,32 +1,36 @@
-import { useState } from 'react'
+import { Link } from "../hooks/router/Link"
+import { useAuthstore } from "./store/Authstore"
+import styles from './JobCard.module.css'
+import { BtnFavorite } from "../hooks/global/BtnFavorite"
+import { AplyButton } from "../hooks/global/AplyButton"
 
 export function JobCard({ job }) {
-  const [isApplied, setIsApplied] = useState(false)
 
-  const handleApplyClick = () => {
-    setIsApplied(true)
-  }
+    const { isLoggedIn } = useAuthstore()
 
-  const buttonClasses = isApplied ? 'button-apply-job is-applied' : 'button-apply-job'
-  const buttonText = isApplied ? 'Aplicado' : 'Aplicar'
+    return (
+        <div className={styles.resBusqueda}>
+            <li>
+                <article>
+                    <div>
+                        <Link href={`/job/${job.id}`} /* target="_blank" rel="noreferrer" */>
+                            <h3 className="title_job">{job.titulo}</h3>
+                        </Link>
 
-  return (
-    <article
-      className="job-listing-card"
-      data-modalidad={job.data.modalidad}
-      data-nivel={job.data.nivel}
-      data-technology={job.data.technology}
-    >
-      <div>
-        <h3>{job.titulo}</h3>
-        <small>
-          {job.empresa} | {job.ubicacion}
-        </small>
-        <p>{job.descripcion}</p>
-      </div>
-      <button className={buttonClasses} onClick={handleApplyClick}>
-        {buttonText}
-      </button>
-    </article>
-  )
+                        <small className={styles.firstP}>
+                            {job.empresa} | {job.ubicacion}
+                        </small>
+
+                        <p className={styles.secondP}>{job.descripcion}</p>
+                    </div>
+                    <div className={isLoggedIn ? styles.btnsJobCard : ''}>
+                        <AplyButton jobId={job.id} />
+                        <BtnFavorite jobId={job.id} isLoggedIn={isLoggedIn} />
+                    </div>
+                </article>
+            </li>
+        </div>
+    )
 }
+
+
