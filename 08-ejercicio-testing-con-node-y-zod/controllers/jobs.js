@@ -1,14 +1,14 @@
 /* Aquí debe ir la lógica de tu controlador */
-import { JobsModel } from "../models/jobs.js";
 import { DEFAULTS } from "../config.js";
+import { JobsModel } from "../models/jobs.js";
 
-const default_limit = DEFAULTS.LIMIT_PAGINATION;
-const default_offset = DEFAULTS.LIMIT_OFFSET;
+const defaultLimit = DEFAULTS.LIMIT_PAGINATION;
+const defaultOffset = DEFAULTS.LIMIT_OFFSET;
 
 export class jobsController {
 
     static async getAllJobs(req, res) {
-        const { offset = default_offset, limit = default_limit, text, technology, type, level } = req.query;
+        const { offset = defaultOffset, limit = defaultLimit, text, technology, type, level } = req.query;
         const { paginatedJobs, total } = await JobsModel.getAllJobs({ offset, limit, text, technology, type, level });
         return res.status(200).json({
             total: total,
