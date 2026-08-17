@@ -1,6 +1,5 @@
+import crypto from 'crypto'
 import jobs from '../jobs.json' with { type: 'json' }
-import fs from 'fs'
-import cripto from 'crypto'
 
 /* Aquí deberá ir la lógica de tu modelo */
 /* Recuerda que el modelo SOLO debe manejar la lógica de los datos, en este caso nuestro JSON */
@@ -56,7 +55,7 @@ export class JobsModel {
 
     static async createJob({ titulo, empresa, ubicacion, descripcion, data, content }) {
         const newJob = {
-            id: cripto.randomUUID(),
+            id: crypto.randomUUID(),
             titulo,
             empresa,
             ubicacion,
