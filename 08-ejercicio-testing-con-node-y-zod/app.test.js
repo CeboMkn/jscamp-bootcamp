@@ -33,7 +33,9 @@ const jobValido = {
   }
 }
 
-// Como en muchos tests usamos fetch y comparaciones entre `status`. Lo mejor es crear un helper que unifique estas cosas y simplifique el código. Siguiendo con este patrón, podemos hacer lo mismo con la función que tenemos debajo, `normalizePath` normaliza el path que se pasa por argumento a nuestros helpers para que el desarrollador tenga la libertad de usar `/jobs` o `job` como path.
+// Como en muchos tests usamos fetch y comparaciones entre `status`. Lo mejor es crear un helper que unifique estas cosas y simplifique el código. 
+// Siguiendo con este patrón, podemos hacer lo mismo con la función que tenemos debajo, `normalizePath` normaliza el path que se pasa por argumento 
+// a nuestros helpers para que el desarrollador tenga la libertad de usar `/jobs` o `jobs` como path.
 function normalizePath(path = '/') {
   return path.startsWith('/') ? path : `/${path}`
 }
@@ -41,7 +43,8 @@ function normalizePath(path = '/') {
 async function getRequestAndCheckStatus(path = '/', expectedStatus) {
   const res = await fetch(`${BASE_URL}${normalizePath(path)}`)
   assert.strictEqual(res.status, expectedStatus)
-  return res
+  const json = await res.json()
+  return json
 }
 
 async function postRequestAndCheckStatus(path = '/', expectedStatus, body) {
@@ -51,7 +54,8 @@ async function postRequestAndCheckStatus(path = '/', expectedStatus, body) {
     body: JSON.stringify(body)
   })
   assert.strictEqual(res.status, expectedStatus)
-  return res
+  const json = await res.json()
+  return json
 }
 
 async function putRequestAndCheckStatus(path = '/', expectedStatus, body) {
@@ -81,11 +85,10 @@ async function deleteRequestAndCheckStatus(path = '/', expectedStatus) {
 }
 
 async function createTestJob() {
-  const res = await postRequestAndCheckStatus('jobs', 201, {
+  return await postRequestAndCheckStatus('jobs', 201, {
     ...jobValido,
     titulo: `Job de prueba ${crypto.randomUUID()}`
   })
-  return res.json()
 }
 
 before(async () => {
@@ -104,35 +107,30 @@ after(async () => {
 describe('GET /jobs', () => {
   test('responde 200 y devuelve un array de trabajos', async () => {
     /* Implementamos nuestro helper para facilitar la lectura del código y reducir lineas */
-    const res = await getRequestAndCheckStatus('jobs', 200)
-    const json = await res.json() // <- Esto lo podemos agregar dentro del mismo helper y reducimos aún más lineas. No lo hicimos para no dejar todo tan reducido. Tu lo puedes hacer.
+    const json = await getRequestAndCheckStatus('jobs', 200)
     assert.ok(Array.isArray(json.data))
   })
 
   test('filtra trabajos por tecnología', async () => {
-    const res = await getRequestAndCheckStatus('jobs?technology=react', 200)
-    const json = await res.json()
+    const json = await getRequestAndCheckStatus('jobs?technology=react', 200)
     assert.ok(json.data.every(job => job.data.technology.some(t => t.toLowerCase().includes('react'))))
   })
 
   test('respeta el límite de resultados', async () => {
-    const res = await getRequestAndCheckStatus('jobs?limit=2', 200)
-    const json = await res.json()
+    const json = await getRequestAndCheckStatus('jobs?limit=2', 200)
     assert.strictEqual(json.limit, 2)
     assert.strictEqual(json.data.length, 2)
   })
 
   test('aplica offset correctamente', async () => {
-    const res = await getRequestAndCheckStatus('jobs?offset=1', 200)
-    const json = await res.json()
+    const json = await getRequestAndCheckStatus('jobs?offset=1', 200)
     assert.strictEqual(json.data[0].id, seedJobId)
   })
 })
 
 describe('POST /jobs', () => {
   test('crea un job con buen formato y devuelve 201', async () => {
-    const res = await postRequestAndCheckStatus('/jobs', 201, jobValido)
-    const json = await res.json()
+    const json = await postRequestAndCheckStatus('/jobs', 201, jobValido)
     assert.ok(json.id)
     assert.deepStrictEqual({ ...json, id: undefined }, { ...jobValido, id: undefined }) // <- Agregamos un `ID` con valor `undefined` para que el `JSON.stringify` no genere un error. Esto es lo que hace que nuestro `deepStrictEqual` funcione.
   })
@@ -162,14 +160,12 @@ describe('POST /jobs', () => {
 
 describe('GET /jobs/:id', () => {
   test('devuelve el trabajo con el id especificado', async () => {
-    const res = await getRequestAndCheckStatus(`/jobs/${seedJobId}`, 200)
-    const json = await res.json()
+    const json = await getRequestAndCheckStatus(`/jobs/${seedJobId}`, 200)
     assert.strictEqual(json.id, seedJobId)
   })
 
   test('devuelve 404 cuando el id no existe', async () => {
-    const res = await getRequestAndCheckStatus(`/jobs/${invalidId}`, 404)
-    const json = await res.json()
+    const json = await getRequestAndCheckStatus(`/jobs/${invalidId}`, 404)
     assert.ok(json.error)
   })
 })
@@ -195,8 +191,7 @@ describe('PUT /jobs/:id', () => {
 
     await putRequestAndCheckStatus(`/jobs/${created.id}`, 204, jobCompleto)
 
-    const res = await getRequestAndCheckStatus(`/jobs/${created.id}`, 200)
-    const json = await res.json()
+    const json = await getRequestAndCheckStatus(`/jobs/${created.id}`, 200)
     assert.deepStrictEqual(json, { id: created.id, ...jobCompleto })
   })
 
@@ -209,13 +204,11 @@ describe('PATCH /jobs/:id', () => {
   test('actualiza solo los campos enviados y devuelve 204', async () => {
     const created = await createTestJob()
 
-    const originalRes = await getRequestAndCheckStatus(`/jobs/${created.id}`, 200)
-    const original = await originalRes.json()
+    const original = await getRequestAndCheckStatus(`/jobs/${created.id}`, 200)
 
     await patchRequestAndCheckStatus(`/jobs/${created.id}`, 204, { titulo: 'Título parcial', ubicacion: 'Barcelona' })
 
-    const res = await getRequestAndCheckStatus(`/jobs/${created.id}`, 200)
-    const json = await res.json()
+    const json = await getRequestAndCheckStatus(`/jobs/${created.id}`, 200)
     assert.strictEqual(json.titulo, 'Título parcial')
     assert.strictEqual(json.ubicacion, 'Barcelona')
     assert.strictEqual(json.empresa, original.empresa)
@@ -232,9 +225,7 @@ describe('PATCH /jobs/:id', () => {
 describe('DELETE /jobs/:id', () => {
   test('elimina el trabajo y devuelve 204', async () => {
     const created = await createTestJob()
-
     await deleteRequestAndCheckStatus(`/jobs/${created.id}`, 204)
-
     await getRequestAndCheckStatus(`/jobs/${created.id}`, 404)
   })
 
