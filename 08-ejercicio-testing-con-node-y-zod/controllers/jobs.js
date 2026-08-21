@@ -1,65 +1,76 @@
-import { JobModel } from "../models/job.js"
-import { DEFAULTS } from "../config.js"
+/* Aquí debe ir la lógica de tu controlador */
+import { DEFAULTS } from "../config.js";
+import { JobsModel } from "../models/jobs.js";
 
-export class JobController {
-    static async getAll(req, res){
+const defaultLimit = DEFAULTS.LIMIT_PAGINATION;
+const defaultOffset = DEFAULTS.LIMIT_OFFSET;
 
-        const { text, technology, type, level, limit = DEFAULTS.LIMIT_PAGINATION, offset = DEFAULTS.OFFSET_PAGINATION } = req.query
+export class jobsController {
 
-        const { paginatedJobs, limitNumber, offsetNumber } = await JobModel.getAll({ text, technology, type, level, limit, offset }) 
-
-        return res.json({ data: paginatedJobs, total: paginatedJobs.length, limit: limitNumber, offset: offsetNumber})
+    static async getAllJobs(req, res) {
+        const { offset = defaultOffset, limit = defaultLimit, text, technology, type, level } = req.query;
+        const { paginatedJobs, total } = await JobsModel.getAllJobs({ offset, limit, text, technology, type, level });
+        return res.status(200).json({
+            total: total,
+            result: paginatedJobs.length,
+            offset: Number(offset),
+            limit: Number(limit),
+            data: paginatedJobs
+        });
     }
 
-    static async getId(req, res){
-
-        const { id } = req.params
-
-        const {status, job} = await JobModel.getId(id)
-        
-        return res.status(status).json(job)
+    static async getJobById(req, res) {
+        const { id } = req.params;
+        const job = await JobsModel.getJobById(id);
+        if (!job) {
+            return res.status(404).json({ error: 'Trabajo no encontrado' });
+        }
+        return res.status(200).json(job);
     }
 
-    static async create(req, res){
-        
-        const { titulo, empresa, ubicacion, descripcion, data } = req.body
+    static async createJob(req, res) {
 
-        const {status, newJob} = await JobModel.create({ titulo, empresa, ubicacion, descripcion, data })
-        
-        return res.status(status).json(newJob)
+        const { titulo, empresa, ubicacion, descripcion, data, content } = req.body;
+        const newJob = await JobsModel.createJob({ titulo, empresa, ubicacion, descripcion, data, content });
+
+        return res.status(201).json(newJob);
+
     }
 
-    static async update(req, res){
+    static async updateJob(req, res) {
+        const { id } = req.params;
+        const { titulo, empresa, ubicacion, descripcion, data, content } = req.body;
+        const updatedJob = await JobsModel.updateJob(id, { titulo, empresa, ubicacion, descripcion, data, content });
 
-        const { id } = req.params
-        const sentJob = req.body
+        if (!updatedJob) {
+            return res.status(404).json({ error: 'Trabajo no encontrado' });
+        }
 
-        const { status, error } = await JobModel.update({ id, sentJob })
-        
-        return error
-            ? res.status(status).json(error)
-            : res.status(status).send()
+        return res.status(204).end();
     }
 
-    static async partialUpdate(req, res){
-        const { id } = req.params
-        const sentJob = req.body
+    static async patchJob(req, res) {
+        const { id } = req.params;
+        const input = req.body;
 
-        const { status, error } = await JobModel.partialUpdate({ id, sentJob })
-        
-        return error
-            ? res.status(status).json(error)
-            : res.status(status).send()
+        const updatedJob = await JobsModel.patchJob({ id, input });
+
+        if (!updatedJob) {
+            return res.status(404).json({ error: 'Trabajo no encontrado' });
+        }
+
+        return res.status(204).end();
     }
 
-    static async delete(req, res){
+    static async deleteJob(req, res) {
+        const { id } = req.params;
+        const deletedJob = await JobsModel.deleteJob(id);
 
-        const { id } = req.params
-        
-        const { status, error } = await JobModel.delete(id)
+        if (!deletedJob) {
+            return res.status(404).json({ error: 'Trabajo no encontrado' });
+        }
 
-        return error
-            ? res.status(status).json(error)
-            : res.status(status).send()
+        return res.status(204).end();
     }
+
 }

@@ -1,44 +1,38 @@
 import { Router } from 'express'
-import { JobController } from '../controllers/jobs.js'
-import { validateJob, validatePartialJob } from '../schemas/jobs.js'
+import { jobsController } from "../controllers/jobs.js";
+import { validateJob, validatePartialJob } from "../schemas/jobs.js";
 
 export const jobsRouter = Router()
 
-function validateCreate(req, res, next) {
-  const result = validateJob(req.body)
+const validateJobMiddleware = (req, res, next) => {
+  const { success, data, error } = validateJob(req.body)
 
-  if (!result.success) {
-    return res.status(400).json({
-      error: 'Invalid Request',
-      details: result.error.issues,
-    })
+  if (!success) {
+    return res.status(400).json({ message: 'Datos de trabajo inválidos', errors: error.issues })
   }
 
-  req.body = result.data
+  req.body = data
   next()
 }
 
-function validatePartialUpdate(req, res, next) {
-  const result = validatePartialJob(req.body)
+const validatePartialJobMiddleware = (req, res, next) => {
+  const { success, data, error } = validatePartialJob(req.body)
 
-  if (!result.success) {
-    return res.status(400).json({
-      error: 'Invalid Request',
-      details: result.error.issues,
-    })
+  if (!success) {
+    return res.status(400).json({ message: 'Datos de trabajo inválidos', errors: error.issues })
   }
 
-  req.body = result.data
+  req.body = data
   next()
 }
 
-jobsRouter.get('/', JobController.getAll)
-jobsRouter.get('/:id', JobController.getId)
+jobsRouter.get('/', jobsController.getAllJobs);
+jobsRouter.get('/:id', jobsController.getJobById);
 
-jobsRouter.post('/', validateCreate, JobController.create)
+jobsRouter.post('/', validateJobMiddleware, jobsController.createJob);
 
-jobsRouter.put('/:id', JobController.update)
+jobsRouter.put('/:id', validateJobMiddleware, jobsController.updateJob);
 
-jobsRouter.patch('/:id', validatePartialUpdate, JobController.partialUpdate)
+jobsRouter.patch('/:id', validatePartialJobMiddleware, jobsController.patchJob);
 
-jobsRouter.delete('/:id', JobController.delete)
+jobsRouter.delete('/:id', jobsController.deleteJob);
