@@ -1,4 +1,3 @@
-// @ts-check
 import { test, expect } from '@playwright/test'
 
 const BASE_URL = 'http://localhost:5173'
