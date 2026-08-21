@@ -6,6 +6,7 @@ import { jobsRouter } from './routes/jobs.js'
 const PORT = DEFAULTS.PORT || 3000
 const app = express()
 
+app.use(corsMiddleware())
 app.use(express.json());
 app.use(corsMiddleware()) // Es un detalle, pero faltó invocar el middleware de cors
 
