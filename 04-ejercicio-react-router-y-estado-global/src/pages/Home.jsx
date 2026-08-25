@@ -1,8 +1,8 @@
-import stl from './Home.module.css'
-import { useRouter } from '../hooks/router/useRouter.js'
 import background from '../assets/img/background.webp'
-import { useDocumentTitle } from '../hooks/global/useDocumentTitle'
 import { BtnGlobal } from '../hooks/global/BtnGlobal.jsx'
+import { useDocumentTitle } from '../hooks/global/useDocumentTitle'
+import { useRouter } from '../hooks/router/useRouter.js'
+import stl from './Home.module.css'
 
 export default function HomePage() {
     useDocumentTitle('Bienvenido :)')
@@ -58,7 +58,8 @@ export default function HomePage() {
 
                         <input
                             name='search'
-                            type="text"
+                            type="search" // agregamos el type search por accesibilidad y por rol del input
+                            aria-label="Buscar empleos por título, habilidad o empresa" // Agregamos aria-label para accesibilidad y tests
                             placeholder="Buscar empleos por título, habilidad o empresa"
                         />
                         <BtnGlobal type="submit">
