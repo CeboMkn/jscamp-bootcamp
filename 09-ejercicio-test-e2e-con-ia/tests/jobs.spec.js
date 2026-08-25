@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test'
+import { expect, test } from '@playwright/test'
 
 const BASE_URL = 'http://localhost:5173'
 
@@ -11,20 +11,22 @@ async function login(page) {
 
 async function searchFromHome(page, term) {
   await page.goto(BASE_URL)
-  await page.getByPlaceholder('Buscar empleos por título, habilidad o empresa').fill(term)
+  // Evitemos siempre usar `locator`, el mejor getter que podemos usar es getByRole: por accesibilidad y manteniblidad
+  await page.getByRole('searchbox', { name: 'Buscar empleos por título, habilidad o empresa' }).fill(term)
   await page.getByRole('button', { name: 'Buscar' }).click()
-  await expect(page.locator('.title_job').first()).toBeVisible()
+  // Los titulos los podemos obtener por medio de getByRole
+  await expect(page.getByRole('heading', { level: 3 }).first()).toBeVisible()
 }
 
 async function openFirstResult(page) {
-  await page.locator('.title_job').first().click()
+  await page.getByRole('heading', { level: 3 }).first().click()
   await expect(page).toHaveURL(/\/job\//)
 }
 
 test.describe('Navegación básica', () => {
   test('la página principal carga y muestra el buscador', async ({ page }) => {
     await page.goto(BASE_URL)
-    await expect(page.getByPlaceholder('Buscar empleos por título, habilidad o empresa')).toBeVisible()
+    await expect(page.getByRole('searchbox', { name: 'Buscar empleos por título, habilidad o empresa' })).toBeVisible()
   })
 })
 
@@ -32,7 +34,7 @@ test.describe('Búsqueda de empleos', () => {
   test('busca "React" y muestra resultados', async ({ page }) => {
     await searchFromHome(page, 'React')
     await expect(page).toHaveURL(/text=React/)
-    await expect(page.locator('.title_job').first()).toBeVisible()
+    await expect(page.getByRole('heading', { level: 3 }).first()).toBeVisible()
   })
 })
 
@@ -58,7 +60,7 @@ test.describe('Flujo completo', () => {
 test.describe('Filtros', () => {
   test('filtra por ubicación Remoto', async ({ page }) => {
     await page.goto(`${BASE_URL}/search`)
-    await page.locator('select[name="ubicacion"]').selectOption('remoto')
+    await page.getByRole('combobox', { name: 'Ubicación' }).selectOption('remoto')
     await expect(page).toHaveURL(/type=remoto/)
 
     const cards = page.locator('#jobs-listings li')
@@ -72,9 +74,9 @@ test.describe('Filtros', () => {
 
   test('filtra por nivel Senior', async ({ page }) => {
     await page.goto(`${BASE_URL}/search`)
-    await page.locator('select[name="nivel"]').selectOption('senior')
+    await page.getByRole('combobox', { name: 'Nivel de experiencia' }).selectOption('senior')
     await expect(page).toHaveURL(/level=senior/)
-    await expect(page.locator('.title_job').first()).toBeVisible()
+    await expect(page.getByRole('heading', { level: 3 }).first()).toBeVisible()
   })
 })
 
@@ -82,11 +84,17 @@ test.describe('Paginación', () => {
   test('muestra paginación y navega a la siguiente página', async ({ page }) => {
     await page.goto(`${BASE_URL}/search`)
 
-    const pageTwo = page.getByRole('link', { name: '2', exact: true })
-    await expect(pageTwo).toBeVisible()
+    const next = page.getByRole('link', { name: 'Siguiente' })
+    await expect(next).toBeVisible()
 
-    await pageTwo.click()
+    const firstResult = page.getByRole('heading', { level: 3 }).first()
+    const titleBefore = await firstResult.textContent()
+
+    await next.click()
+
+    // Verificamod el cambio de página: se actualiza el contador y cambian los resultados
     await expect(page.getByText(/Mostrando 4 - 6 de/)).toBeVisible()
+    await expect(firstResult).not.toHaveText(titleBefore)
   })
 })
 
@@ -98,9 +106,9 @@ test.describe('Detalle de empleo', () => {
     await expect(page.getByRole('heading', { name: 'Descripción', exact: true })).toBeVisible()
     await expect(page.getByRole('heading', { name: 'Requisitos', exact: true })).toBeVisible()
 
-    const detailUrl = page.url()
     await login(page)
-    await page.goto(detailUrl)
+    // Podemos usar `goBack` para volver a la página anterior
+    await page.goBack()
 
     await page.getByRole('button', { name: 'Aplicar' }).first().click()
     await expect(page.getByRole('button', { name: 'Aplicado' }).first()).toBeVisible()
