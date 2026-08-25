@@ -1,5 +1,5 @@
-import stl from './SearchFormSection.module.css'
 import { useInfoFilters } from "../hooks/search/useInfoFilters.js"
+import stl from './SearchFormSection.module.css'
 
 export function SearchFormSection({ onFilters, filters }) {
 
@@ -59,7 +59,8 @@ export function SearchFormSection({ onFilters, filters }) {
                             <option value="kubernetes">Kubernetes</option>
                         </select>
 
-                        <select name="ubicacion" onChange={handleInfoForm} value={filters.ubicacion || ''}>
+                        {/* Agregamos aria-label para los tests y accesibilidad */}
+                        <select name="ubicacion" aria-label="Ubicación" onChange={handleInfoForm} value={filters.ubicacion || ''}>
                             <option value="" disabled hidden>
                                 Ubicación
                             </option>
@@ -83,7 +84,7 @@ export function SearchFormSection({ onFilters, filters }) {
                             <option value="practicas">Prácticas</option>
                         </select> */}
 
-                        <select name="nivel" onChange={handleInfoForm} value={filters.nivel || ''}>
+                        <select name="nivel" aria-label="Nivel de experiencia" onChange={handleInfoForm} value={filters.nivel || ''}>
                             <option value="" disabled hidden>
                                 Nivel de experiencia
                             </option>
