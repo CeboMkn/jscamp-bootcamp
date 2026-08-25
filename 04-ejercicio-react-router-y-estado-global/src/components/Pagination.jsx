@@ -1,5 +1,5 @@
-import styles from './Pagination.module.css'
 import { paginacionVisible } from '../hooks/global/paginacionVisible';
+import styles from './Pagination.module.css';
 
 export function Pagination({ currentPage = 1, totalPages = 1, onPageChange }) {
     const isFirstPage = currentPage === 1;
@@ -39,7 +39,8 @@ export function Pagination({ currentPage = 1, totalPages = 1, onPageChange }) {
                 )}
 
                 <li className={isLastPage ? styles.buttonDisabled : ''}>
-                    <a href="#" onClick={isLastPage ? (e) => e.preventDefault() : handleChangePage(currentPage + 1)}>
+                    {/* Agregamos aria-label */}
+                    <a href="#" aria-label="Siguiente" onClick={isLastPage ? (e) => e.preventDefault() : handleChangePage(currentPage + 1)}>
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                             <path d="M9 6l6 6l-6 6" />
