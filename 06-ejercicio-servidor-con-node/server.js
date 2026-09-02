@@ -1,11 +1,100 @@
-import { createServer } from 'node:http'
+import { randomUUID } from 'node:crypto';
+import { createServer } from 'node:http';
+import { uptime } from 'node:process';
+import { json } from 'node:stream/consumers';
 
 process.loadEnvFile()
 
 const port = process.env.PORT || 3000
 
-const server = createServer((req, res) => {
-  // TODO: Aquí irá la lógica del servidor
+function sendJson(res, statusCode, data) {
+  res.statusCode = statusCode;
+  res.setHeader('Content-Type', 'application/json; charset=utf-8');
+  res.end(JSON.stringify(data));
+}
+
+const server = createServer(async (req, res) => {
+
+  const { url, method } = req;
+  const [path, query] = url.split('?');
+  const searchParams = new URLSearchParams(query);
+
+  if (method === 'GET') {
+    if (path === '/') {
+      sendJson(res, 200, { message: 'Servidor operativo' });
+      return
+    }
+
+    if (path === '/health') {
+      sendJson(res, 200, { status: 'ok', uptime: uptime() });
+      return
+    }
+
+    if (path === '/users') {
+      const name = searchParams.get('name')?.toLowerCase();
+
+      // Excelente! Vamos a aplicar algunas validaciones para los parámetros numéricos
+
+      // Number.isIntegrer ya evalúa que el valor no sea NaN, Infinity o decimal.
+      const isValid = (num) => Number.isInteger(num) && num >= 0
+      
+      const limit = Number(searchParams.get('limit')) || users.length;
+      const offset = Number(searchParams.get('offset')) || 0;
+      
+      // Validamos limit t offser
+      if(!isValid(limit) || !isValid(offset)) {
+        return sendJson(res, 400, { error: 'Los parámetros "limit" y "offset" deben ser números enteros mayores o iguales a 0' });
+      }
+
+      const minAgeRaw = searchParams.get('minAge');
+      const maxAgeRaw = searchParams.get('maxAge');
+      const minAge = minAgeRaw ? Number(minAgeRaw) : null;
+      const maxAge = maxAgeRaw ? Number(maxAgeRaw) : null;
+
+      // Validamos minAge y maxAge con una variación. Solo vamos a pasar por el validador si minAge o maxAge existen como parámetro.
+      if(minAge !== null && !isValid(minAge)) {
+        return sendJson(res, 400, { error: 'El parámetro "minAge" debe ser un número entero mayor o igual a 0' });
+      }
+      if(maxAge !== null && !isValid(maxAge)) {
+        return sendJson(res, 400, { error: 'El parámetro "maxAge" debe ser un número entero mayor o igual a 0' });
+      }
+
+      const paginatedUsers = users
+        .filter(user => {
+          if (name && !user.name.toLowerCase().includes(name)) return false;
+          if (minAge !== null && user.age < minAge) return false;
+          if (maxAge !== null && user.age > maxAge) return false;
+          return true;
+        })
+        .slice(offset, offset + limit);
+
+      sendJson(res, 200, paginatedUsers);
+      return;
+    }
+
+  }
+
+  if (method === 'POST') {
+    if (path === '/users') {
+      const body = await json(req);
+      if (!body || !body.name || !body.age) {
+        return sendJson(res, 400, { error: 'Los campos "name" y "age" son obligatorios' });
+      }
+
+      const newUser = {
+        id: randomUUID(),
+        name: body.name,
+        age: body.age,
+      };
+      users.push(newUser);
+
+      sendJson(res, 201, { message: 'Usuario creado correctamente', user: newUser });
+
+    }
+  }
+
+  return sendJson(res, 404, { error: 'Ruta no encontrada' });
+
 })
 
 server.listen(port, () => {
