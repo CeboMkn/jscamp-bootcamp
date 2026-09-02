@@ -8,3 +8,7 @@ Modificar la app para que funcionen con los tests
 
 Nosotros en la corrección elegimos el segundo camino, por lo siguiente:
 Cuando aplicamos tests a una aplicación, lo interesante no es solo que funcione, sino darnos cuenta de que carencias de accesibilidad o usabilidad tiene. En este caso, como no habían ciertos elementos definidos de la mejor manera a nivel de accesibilidad, hemos tenido que adaptar la aplicación para que los tests pasen.
+
+---
+
+Entiendo, la verdad que voy un poco rápido con el bootcamp, me encontré con que tengo poco tiempo para terminarlo y no me permite dedicarle toda mi atencion, estoy aprendiendo muchisimo con el y me encanta, per creia que tenia mas tiempo para realizarlo, no es una excusa, a partir de ahora me ceñiré a lo estricto de los ejercicios, muchas gracias por el feedback
