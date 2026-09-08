@@ -1,6 +1,6 @@
 import crypto from 'node:crypto'
-import type { Job, CreateJobDTO, UpdateJobDTO, JobFilters } from '../types'
 import { db } from '../db/database'
+import type { CreateJobDTO, Job, JobFilters, UpdateJobDTO } from '../types'
 
 type Modality = Job['data']['modality']
 type Level = Job['data']['level']
@@ -31,6 +31,32 @@ const jobQuery = `
   LEFT JOIN job_technologies jt ON jt.job_id = j.id
   LEFT JOIN job_content jc ON jc.job_id = j.id
 `
+
+// Lo mejor es hacer los `prepare` fuera de las funciones para que se generen una sola vez y reutilizarlos en cada llamada. Esto es una buena práctica de `better-sqlite3`. Hacer estos `prepare` consumen recursos y si lo ponemos dentro de cada función se crearían en cada petición. De esta forma se crea una vez y luego se consume las veces que sea necesario.
+const insertJob = db.prepare(`
+  INSERT INTO jobs (id, title, company, location, description, modality, level)
+  VALUES (?, ?, ?, ?, ?, ?, ?)
+`)
+
+const insertTechnology = db.prepare(`
+  INSERT INTO job_technologies (job_id, technology)
+  VALUES (?, ?)
+`)
+
+const insertContent = db.prepare(`
+  INSERT INTO job_content (id, job_id, description, responsibilities, requirements, about)
+  VALUES (?, ?, ?, ?, ?, ?)
+`)
+
+const updateJob = db.prepare(`
+  UPDATE jobs
+  SET title = ?, company = ?, location = ?, description = ?, modality = ?, level = ?
+  WHERE id = ?
+`)
+
+const deleteTechnologies = db.prepare('DELETE FROM job_technologies WHERE job_id = ?')
+const deleteContent = db.prepare('DELETE FROM job_content WHERE job_id = ?')
+const deleteJob = db.prepare('DELETE FROM jobs WHERE id = ?')
 
 function mapRowToJob(row: JobRow): Job {
   return {
@@ -93,21 +119,6 @@ export class JobModel {
     const id = crypto.randomUUID()
     const newJob: Job = { id, ...input }
 
-    const insertJob = db.prepare(`
-      INSERT INTO jobs (id, title, company, location, description, modality, level)
-      VALUES (?, ?, ?, ?, ?, ?, ?)
-    `)
-
-    const insertTechnology = db.prepare(`
-      INSERT INTO job_technologies (job_id, technology)
-      VALUES (?, ?)
-    `)
-
-    const insertContent = db.prepare(`
-      INSERT INTO job_content (id, job_id, description, responsibilities, requirements, about)
-      VALUES (?, ?, ?, ?, ?, ?)
-    `)
-
     const transaction = db.transaction(() => {
       insertJob.run(
         id,
@@ -142,7 +153,7 @@ export class JobModel {
 
   // Eliminar un job
   static async delete(id: string): Promise<boolean> {
-    const result = db.prepare('DELETE FROM jobs WHERE id = ?').run(id)
+    const result = deleteJob.run(id)
     return result.changes > 0
   }
 
@@ -165,24 +176,6 @@ export class JobModel {
       },
       content: input.content ?? current.content,
     }
-
-    const updateJob = db.prepare(`
-      UPDATE jobs
-      SET title = ?, company = ?, location = ?, description = ?, modality = ?, level = ?
-      WHERE id = ?
-    `)
-
-    const deleteTechnologies = db.prepare('DELETE FROM job_technologies WHERE job_id = ?')
-    const insertTechnology = db.prepare(`
-      INSERT INTO job_technologies (job_id, technology)
-      VALUES (?, ?)
-    `)
-
-    const deleteContent = db.prepare('DELETE FROM job_content WHERE job_id = ?')
-    const insertContent = db.prepare(`
-      INSERT INTO job_content (id, job_id, description, responsibilities, requirements, about)
-      VALUES (?, ?, ?, ?, ?, ?)
-    `)
 
     const transaction = db.transaction(() => {
       updateJob.run(
