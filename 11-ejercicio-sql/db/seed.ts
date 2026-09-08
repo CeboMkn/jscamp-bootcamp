@@ -1,7 +1,7 @@
 /* Aquí irá tu código del segundo ejercicio */
 import crypto from 'node:crypto';
-import { db } from './database';
 import jobs from '../jobs.json';
+import { db } from './database';
 
 db.exec(`
   CREATE TABLE IF NOT EXISTS jobs (
@@ -66,6 +66,9 @@ const seed = db.transaction(() => {
     }
   }
 })
+
+// Vacía las tablas (el ON DELETE CASCADE borra las hijas) para poder re-ejecutar el seed y que no salga error
+db.exec('DELETE FROM jobs')
 
 seed()
 console.log('Tablas creadas y datos insertados correctamente.')
