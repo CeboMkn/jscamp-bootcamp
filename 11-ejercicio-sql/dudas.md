@@ -1,1 +1,2 @@
 <!-- Aquí puedes poner tus dudas sobre el ejercicio -->
+Hola, este ejercicio me ha gustado mucho, estaba deseando llegar a la parte de DB, lo que he realizado es mezcla de curso mas lo que aprendí en su dia en el trabajo, porque trabajo hoy en día con postgres, segurtamente habrá mejores prácticas, estaré encantado de ver el feedback, muchas gracias :)
