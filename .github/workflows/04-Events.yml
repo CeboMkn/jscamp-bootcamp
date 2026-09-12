@@ -19,17 +19,23 @@ jobs:
       issues: write
     steps:
       - name: Mostrar evento
-        run: echo "Evento: ${{ github.event_name }}"
+        run: |
+          echo "Evento: ${{ github.event_name }}"
 
       - name: Mostrar numero de issue
-        run: echo "Numero de issue: ${{ github.event.issue.number }}"
+        run: |
+          echo "Numero de issue: ${{ github.event.issue.number }}"
 
       - name: Mostrar cuerpo de comentario
         if: ${{ github.event_name == 'issue_comment' || github.event_name == 'pull_request_review_comment' }}
-        run: echo "Cuerpo del comentario: ${{ github.event.comment.body }}"
+        env:
+          COMMENT_BODY: ${{ github.event.comment.body }}
+        run: |
+          echo "Cuerpo del comentario: $COMMENT_BODY"
 
       - name: Comentar en issue nueva (bot)
         if: ${{ github.event_name == 'issues' && github.event.action == 'opened' }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh issue comment ${{ github.event.issue.number }} --body "Gracias por el aporte!"
+        run: |
+          gh issue comment ${{ github.event.issue.number }} --body "Gracias por el aporte!"
