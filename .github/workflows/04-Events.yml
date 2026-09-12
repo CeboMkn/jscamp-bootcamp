@@ -1,4 +1,4 @@
-name: 04 - Events2
+﻿name: 04 - Events2
 
 on:
   issues:
@@ -21,7 +21,7 @@ jobs:
       - name: Mostrar evento
         run: echo "Evento: ${{ github.event_name }}"
 
-      - name: Mostrar número de issue
+      - name: Mostrar nÃºmero de issue
         run: echo "Issue: ${{ github.event.issue.number }}"
 
       - name: Mostrar cuerpo del comentario
@@ -32,4 +32,4 @@ jobs:
         if: ${{ github.event_name == 'issues' && github.event.action == 'opened' }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh issue comment ${{ github.event.issue.number }} --body "¡Gracias por tu aporte!"
+        run: gh issue comment ${{ github.event.issue.number }} --body "Â¡Gracias por tu aporte!"
