@@ -1,8 +1,6 @@
 name: 02 - Manual
 
 on:
-  push:
-    branches: [ejercicio-doce-cicd]
   workflow_dispatch:
     inputs:
       logging_level:
