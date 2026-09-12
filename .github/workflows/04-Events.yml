@@ -1,4 +1,4 @@
-﻿name: 04 - Events
+name: 04 - Events
 
 on:
   issues:
@@ -31,5 +31,5 @@ jobs:
       - name: Comentar en issue nueva (bot)
         if: ${{ github.event_name == 'issues' && github.event.action == 'opened' }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: gh issue comment ${{ github.event.issue.number }} --body "Gracias por el aporte!"
