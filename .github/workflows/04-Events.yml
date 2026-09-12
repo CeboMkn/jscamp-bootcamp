@@ -1,4 +1,4 @@
-name: 04 - Events
+﻿name: 04 - Events
 
 on:
   issues:
@@ -18,6 +18,9 @@ jobs:
     permissions:
       issues: write
     steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v6
+        
       - name: Mostrar evento
         run: |
           echo "Evento: ${{ github.event_name }}"
