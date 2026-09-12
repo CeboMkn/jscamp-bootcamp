@@ -1,9 +1,9 @@
 name: 01 - Hello
 
 on:
-push:
+  push:
     branches: [ejercicio-doce-cicd]
-workflow_dispatch:
+  workflow_dispatch:
 
 jobs:
   saludar:
