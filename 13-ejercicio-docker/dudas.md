@@ -1,2 +1,3 @@
 <!-- Escribe aquí tus dudas -->
 
+Holaa!!, estoy muy contento de poder acabar el bootcamp a tiempo, aunque quedan 2 días, he dejado las opcionales para hacerlas tranquilamente por mi cuenta ya que se me ha echado el tiempo encima, creo que está todo correcto en este último ejercicio y he aprendido un montón en general con el curso, lo he recomendado a toda la gente que está empezando, porque aunque hoy en día se programe con IA, es muy importante saber las bases de lo que haces para saber comunicarte con ella y ver que todo lo hace bien, es una herramienta de ayuda no quien lleva los mandos. Una vez terminado el bootcamp, ¿cuál es el siguiente paso? Muchas gracias por todo el apoyo durante el curso :)
