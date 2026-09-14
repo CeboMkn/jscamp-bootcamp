@@ -18,14 +18,21 @@ jobs:
     permissions:
       issues: write
     steps:
-      - name: Descargar repositorio
-        uses: actions/checkout@v6
-        
+      # Esto es innecesario: gh usa GITHUB_REPOSITORY automaticamente, no hace falta descargar el codigo
+      # - name: Descargar repositorio
+      #   uses: actions/checkout@v6
+
       - name: Mostrar evento
         run: |
           echo "Evento: ${{ github.event_name }}"
 
+      # En pull_request_review_comment no existe github.event.issue, se condiciona para no imprimir vacio
+      # - name: Mostrar numero de issue
+      #   run: |
+      #     echo "Numero de issue: ${{ github.event.issue.number }}"
+
       - name: Mostrar numero de issue
+        if: ${{ github.event_name == 'issues' || github.event_name == 'issue_comment' }}
         run: |
           echo "Numero de issue: ${{ github.event.issue.number }}"
 
