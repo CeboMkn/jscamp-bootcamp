@@ -1,2 +1,6 @@
 <!-- Escribe aquí tus dudas -->
 Hola, tuve varios problemas con este ejercicio por no repasar bien los videos, primero me salieron como problemas en github de indentacion, que resulta que era problema del 04 events al no poner | en los steps, me volvi loco jaja, y me costo que funcionara, tambien no me funcionaban las actions, y era porque lo estaba haciendo en mi rama de ejercicio y hay que hacerlo en main, pero claro en mi rama de ejercicio ponia que se ejecutara cuando un push en la rama en la que estaba pero asi no me fguncionaban manuales porque se ejecutaban nada mas subirlos, asique ya cambie a main para realizarlos, y luego hize merge en la rama de los ejercicios para tenerlos, por lo demas aprendí apartir de ahi y me mire bien todos los videos, creo que esta completo, muchas gracias :)
+
+**Respuesta:** Excelente! jaja si, te entiendo. Sobre todo con los problemas de identación, hay veces que no queda claro que es (por un espacio, etc) y te volves loco.
+
+Me alegro que lo hayas podido sacar a flote!
